@@ -217,6 +217,42 @@ input[type=range] {
   cursor: pointer;
   z-index: 10;
 }
+
+/* ── FULLSCREEN CONTAINER ── */
+#fs-container {
+  width: min(820px, 100vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+#fs-container .toolbar,
+#fs-container .lesson-bar {
+  width: 100%;
+}
+/* When actually fullscreen, fill viewport */
+#fs-container:fullscreen,
+#fs-container:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg);
+  overflow-y: auto;
+  padding: 8px;
+  box-sizing: border-box;
+}
+#fs-container:fullscreen .map-wrap,
+#fs-container:-webkit-full-screen .map-wrap {
+  width: 100%;
+  flex: 1;
+}
+#fs-container:fullscreen .toolbar,
+#fs-container:-webkit-full-screen .toolbar {
+  width: 100%;
+}
+#fs-container:fullscreen .lesson-bar,
+#fs-container:-webkit-full-screen .lesson-bar {
+  width: 100%;
+}
 </style>
 </head>
 <body>
@@ -228,6 +264,9 @@ input[type=range] {
     <p>征服路線 × 支派分地 · 可分段切換 · 適合課堂教學</p>
   </div>
 </div>
+
+<!-- FULLSCREEN WRAPPER (contains toolbar + lesson + map) -->
+<div id="fs-container">
 
 <!-- TOOLBAR -->
 <div class="toolbar">
@@ -612,202 +651,226 @@ input[type=range] {
 
   <!-- ── CENTRAL CAMPAIGN (GREEN, Josh 6–9) ── -->
   <g id="g-central">
-    <!-- 1: Shittim → Jordan crossing → Gilgal -->
-    <path class="step-g step-1" d="M 778 350 Q 748 342 710 330"
+    <!-- 1: Shittim (east bank) → cross Jordan → Gilgal (west bank, NW of Jericho) -->
+    <path class="step-g step-1" d="M 760 355 Q 720 348 672 342"
           stroke="#22cc44" stroke-width="5" fill="none" marker-end="url(#ag)" filter="url(#gg)" opacity="0.92"/>
-    <!-- 2: Gilgal → Jericho -->
-    <path class="step-g step-2" d="M 706 332 Q 688 348 662 368"
+    <!-- 2: Gilgal → Jericho (south, very close) -->
+    <path class="step-g step-2" d="M 670 344 Q 665 358 658 372"
           stroke="#22cc44" stroke-width="5" fill="none" marker-end="url(#ag)" filter="url(#gg)" opacity="0.92"/>
-    <!-- 3: Jericho → Bethel/Ai -->
-    <path class="step-g step-3" d="M 658 368 Q 590 338 492 298"
+    <!-- 3: Jericho → Bethel/Ai (west up hill country) -->
+    <path class="step-g step-3" d="M 656 372 Q 590 342 498 305"
           stroke="#22cc44" stroke-width="5" fill="none" marker-end="url(#ag)" filter="url(#gg)" opacity="0.92"/>
-    <!-- 4: Ai → Gibeon (Hivites make peace) -->
-    <path class="step-g step-4" d="M 488 302 Q 466 348 434 393"
+    <!-- 4: Ai → Gibeon (south-west) -->
+    <path class="step-g step-4" d="M 494 308 Q 470 352 436 398"
           stroke="#22cc44" stroke-width="5" fill="none" marker-end="url(#ag)" filter="url(#gg)" opacity="0.92"/>
-    <!-- 5: Night march Gilgal→Gibeon (Josh 10 rescue) -->
-    <path class="step-g step-5" d="M 706 332 Q 610 358 436 396"
+    <!-- 5: Night march Gilgal → Gibeon (rescue, Josh 10) -->
+    <path class="step-g step-5" d="M 668 346 Q 580 362 438 400"
           stroke="#22cc44" stroke-width="4.5" fill="none" stroke-dasharray="11,6" marker-end="url(#ag2)" filter="url(#gg)" opacity="0.78"/>
   </g>
 
   <!-- ── SOUTHERN CAMPAIGN (RED, Josh 10) ── -->
   <g id="g-south">
-    <!-- 6: Gibeon → Upper Beth Horon pursuit -->
-    <path class="step-r step-6" d="M 432 397 Q 408 394 380 392"
+    <!-- 6: Gibeon → Upper Beth Horon (west pursuit) -->
+    <path class="step-r step-6" d="M 434 400 Q 410 396 386 394"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 7: Upper → Lower Beth Horon (descent) -->
-    <path class="step-r step-7" d="M 376 392 Q 370 370 360 347"
+    <!-- 7: Upper → Lower Beth Horon (descent NW) -->
+    <path class="step-r step-7" d="M 384 395 Q 372 372 360 350"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 8: Lower BH → Aijalon → Beit Shemesh area -->
-    <path class="step-r step-8" d="M 358 348 Q 348 382 356 432"
+    <!-- 8: Lower BH → Aijalon area → Beit Shemesh -->
+    <path class="step-r step-8" d="M 358 352 Q 348 386 352 434"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 9: → Makkedah area -->
-    <path class="step-r step-9" d="M 355 435 Q 335 442 316 452"
+    <!-- 9: → Makkedah -->
+    <path class="step-r step-9" d="M 350 436 Q 332 445 316 455"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
     <!-- 10: Makkedah → Azekah -->
-    <path class="step-r step-10" d="M 315 455 Q 322 480 332 506"
+    <path class="step-r step-10" d="M 315 458 Q 318 482 328 508"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
     <!-- 11: Azekah → Libnah -->
-    <path class="step-r step-11" d="M 334 510 Q 350 528 368 546"
+    <path class="step-r step-11" d="M 330 512 Q 346 530 362 550"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
     <!-- 12: Libnah → Lachish -->
-    <path class="step-r step-12" d="M 368 550 Q 352 572 332 596"
+    <path class="step-r step-12" d="M 362 554 Q 348 576 330 600"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 13: Lachish ↔ Eglon -->
-    <path class="step-r step-13" d="M 330 600 Q 312 622 290 646"
+    <!-- 13: Lachish → Eglon and back -->
+    <path class="step-r step-13" d="M 328 604 Q 308 625 286 650"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <path class="step-r step-13" d="M 290 650 Q 312 626 332 602"
+    <path class="step-r step-13" d="M 286 654 Q 308 628 330 606"
           stroke="#ee3322" stroke-width="3.5" fill="none" stroke-dasharray="7,5" marker-end="url(#ar2)" filter="url(#gr)" opacity="0.65"/>
-    <!-- 14: → Hebron -->
-    <path class="step-r step-14" d="M 334 600 Q 408 592 488 592"
+    <!-- 14: → Hebron (east) -->
+    <path class="step-r step-14" d="M 332 602 Q 404 596 484 596"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 15: Hebron → Debir -->
-    <path class="step-r step-15" d="M 488 596 Q 470 635 447 675"
+    <!-- 15: Hebron → Debir (SW) -->
+    <path class="step-r step-15" d="M 484 600 Q 466 638 444 678"
           stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
     <!-- Return to Gilgal -->
-    <path class="step-r step-ret" d="M 447 678 Q 555 640 660 380"
-          stroke="#ee3322" stroke-width="3" fill="none" stroke-dasharray="8,7" marker-end="url(#ar2)" filter="url(#gr)" opacity="0.35"/>
+    <path class="step-r step-ret" d="M 444 680 Q 548 644 658 378"
+          stroke="#ee3322" stroke-width="3" fill="none" stroke-dasharray="8,7" marker-end="url(#ar2)" filter="url(#gr)" opacity="0.32"/>
   </g>
 
   <!-- ── STEP NUMBER BADGES ── -->
   <!-- Green -->
   <g id="badges-central">
-    <circle cx="752" cy="340" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="752" y="345" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">1</text>
+    <circle cx="722" cy="348" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
+    <text x="722" y="353" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">1</text>
 
-    <circle cx="685" cy="352" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="685" y="357" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">2</text>
+    <circle cx="664" cy="358" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
+    <text x="664" y="363" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">2</text>
 
-    <circle cx="578" cy="326" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="578" y="331" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">3</text>
+    <circle cx="576" cy="332" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
+    <text x="576" y="337" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">3</text>
 
-    <circle cx="460" cy="346" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="460" y="351" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">4</text>
+    <circle cx="462" cy="350" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
+    <text x="462" y="355" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">4</text>
 
-    <circle cx="598" cy="344" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="598" y="349" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">5</text>
+    <circle cx="560" cy="354" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
+    <text x="560" y="359" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">5</text>
   </g>
 
   <!-- Red -->
   <g id="badges-south">
-    <circle cx="406" cy="393" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="406" y="398" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">6</text>
+    <circle cx="410" cy="395" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="410" y="400" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">6</text>
 
-    <circle cx="368" cy="366" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="368" y="371" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">7</text>
+    <circle cx="370" cy="370" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="370" y="375" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">7</text>
 
-    <circle cx="352" cy="402" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="352" y="407" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">8</text>
+    <circle cx="350" cy="406" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="350" y="411" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">8</text>
 
-    <circle cx="322" cy="444" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="322" y="449" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">9</text>
+    <circle cx="320" cy="447" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="320" y="452" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">9</text>
 
-    <circle cx="318" cy="480" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="318" y="485" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">10</text>
+    <circle cx="314" cy="483" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="314" y="488" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">10</text>
 
-    <circle cx="356" cy="528" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="356" y="533" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">11</text>
+    <circle cx="348" cy="532" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="348" y="537" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">11</text>
 
-    <circle cx="340" cy="572" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="340" y="577" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">12</text>
+    <circle cx="336" cy="578" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="336" y="583" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">12</text>
 
-    <circle cx="302" cy="625" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="302" y="630" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">13</text>
+    <circle cx="298" cy="628" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="298" y="633" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">13</text>
 
-    <circle cx="430" cy="594" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="430" y="599" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">14</text>
+    <circle cx="422" cy="596" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="422" y="601" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">14</text>
 
-    <circle cx="462" cy="648" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="462" y="653" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">15</text>
+    <circle cx="456" cy="652" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
+    <text x="456" y="657" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">15</text>
   </g>
 
   <!-- ── CITY DOTS & LABELS ── -->
-  <!-- Shittim -->
-  <circle cx="780" cy="350" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
-  <text x="790" y="345" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">什亭 Shittim</text>
+  <!--
+    Reference image coordinate mapping (820×900 viewBox):
+    Shittim       762, 356  (east of Jordan, far right)
+    Gilgal        668, 342  (WEST of Jordan, NW of Jericho — KEY FIX)
+    Jericho       656, 374  (just south of Gilgal, on Jordan rift)
+    Bethel        448, 295  (hill country, NW of Ai)
+    Ai            494, 308  (questionable, near Bethel)
+    Gibeon        434, 400  (al-Jib, NW of Jerusalem)
+    Jerusalem     492, 462  (centre landmark)
+    Shiloh        528, 252  (north of Bethel, hill country)
+    Lower BH      358, 350  (top of Beth Horon pass)
+    Upper BH      382, 396  (just east/below Lower BH on map — NOTE: geographically upper=east, lower=west)
+    Aijalon       338, 420  (valley below pass)
+    Beit Shemesh  356, 438
+    Makkedah      314, 456  (?)
+    Azekah        328, 510
+    Libnah        364, 552  (?)
+    Lachish       328, 600
+    Eglon         284, 652  (?)
+    Hebron        484, 598
+    Debir         442, 680  (?)
+  -->
 
-  <!-- Gilgal -->
-  <circle cx="708" cy="330" r="10" fill="#ff8844" stroke="#fff" stroke-width="2.5" filter="url(#dg)"/>
-  <circle cx="708" cy="330" r="5" fill="#ffcc88"/>
-  <text x="718" y="322" font-size="11" fill="#ffcc88" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">吉甲 Gilgal</text>
-  <text x="718" y="334" font-size="9" fill="#ffa060" font-family="Noto Serif TC" filter="url(#cl)">大本營</text>
+  <!-- Shittim -->
+  <circle cx="762" cy="356" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
+  <text x="770" y="351" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">什亭 Shittim</text>
+  <text x="770" y="363" font-size="8.5" fill="#ccc" font-family="Noto Serif TC" filter="url(#cl)">（東岸出發地）</text>
+
+  <!-- Gilgal — WEST of Jordan, NW of Jericho -->
+  <circle cx="668" cy="342" r="11" fill="#ff8844" stroke="#fff" stroke-width="2.5" filter="url(#dg)"/>
+  <circle cx="668" cy="342" r="6" fill="#ffcc88"/>
+  <text x="678" y="334" font-size="11" fill="#ffcc88" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">吉甲 Gilgal</text>
+  <text x="678" y="346" font-size="9" fill="#ffa060" font-family="Noto Serif TC" filter="url(#cl)">大本營（河西）</text>
 
   <!-- Jericho -->
-  <circle cx="660" cy="370" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
-  <text x="625" y="363" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">耶利哥</text>
-  <text x="625" y="375" font-size="9" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Jericho</text>
+  <circle cx="656" cy="375" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
+  <text x="610" y="368" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">耶利哥</text>
+  <text x="610" y="380" font-size="9" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Jericho</text>
 
   <!-- Bethel -->
-  <circle cx="450" cy="292" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="432" y="282" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">伯特利 Bethel</text>
+  <circle cx="448" cy="295" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
+  <text x="428" y="285" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">伯特利 Bethel</text>
 
   <!-- Ai (questionable) -->
-  <circle cx="490" cy="302" r="6" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="500" y="296" font-size="11" fill="#ffee88" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">艾城 Ai ?</text>
+  <circle cx="494" cy="308" r="6" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
+  <text x="503" y="302" font-size="11" fill="#ffee88" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">艾城 Ai ?</text>
 
-  <!-- Gibeon -->
-  <circle cx="432" cy="397" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
-  <text x="398" y="388" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">基遍 Gibeon</text>
-  <text x="398" y="400" font-size="8.5" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">(al-Jib)  ☀太陽停住</text>
+  <!-- Gibeon (al-Jib) -->
+  <circle cx="434" cy="400" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
+  <text x="400" y="390" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">基遍 Gibeon</text>
+  <text x="400" y="402" font-size="8.5" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">(al-Jib) ☀太陽停住</text>
 
   <!-- Jerusalem -->
-  <circle cx="490" cy="460" r="9" fill="#ffcc44" stroke="#fff" stroke-width="2.5" filter="url(#dg)"/>
-  <text x="502" y="455" font-size="12.5" fill="#ffe060" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">耶路撒冷</text>
-  <text x="502" y="468" font-size="9.5" fill="#ffd040" font-family="Noto Serif TC" filter="url(#cl)">Jerusalem</text>
+  <circle cx="492" cy="462" r="9" fill="#ffcc44" stroke="#fff" stroke-width="2.5" filter="url(#dg)"/>
+  <text x="504" y="457" font-size="12.5" fill="#ffe060" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">耶路撒冷</text>
+  <text x="504" y="470" font-size="9.5" fill="#ffd040" font-family="Noto Serif TC" filter="url(#cl)">Jerusalem</text>
 
   <!-- Shiloh -->
-  <circle cx="528" cy="248" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="538" y="244" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">示羅 Shiloh</text>
-  <text x="538" y="256" font-size="8.5" fill="#e8c858" font-family="Noto Serif TC" filter="url(#cl)">（會幕）</text>
+  <circle cx="528" cy="252" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
+  <text x="538" y="247" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">示羅 Shiloh</text>
+  <text x="538" y="259" font-size="8.5" fill="#e8c858" font-family="Noto Serif TC" filter="url(#cl)">（會幕）</text>
 
   <!-- Lower Beth Horon -->
-  <circle cx="358" cy="348" r="6" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="268" y="338" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">下伯和崙</text>
-  <text x="268" y="350" font-size="8.5" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Lower Beth Horon</text>
+  <circle cx="358" cy="350" r="6" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
+  <text x="266" y="342" font-size="9.5" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">下伯和崙</text>
+  <text x="266" y="354" font-size="8" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Lower Beth Horon</text>
 
   <!-- Upper Beth Horon -->
-  <circle cx="380" cy="393" r="6" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="382" y="378" font-size="9.5" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">上伯和崙</text>
-  <text x="382" y="389" font-size="8" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Upper Beth Horon</text>
+  <circle cx="382" cy="396" r="6" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
+  <text x="386" y="382" font-size="9.5" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">上伯和崙</text>
+  <text x="386" y="393" font-size="8" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Upper Beth Horon</text>
 
   <!-- Aijalon -->
-  <circle cx="340" cy="418" r="5.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.2" filter="url(#dg)"/>
-  <text x="280" y="415" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">亞雅崙 Aijalon</text>
+  <circle cx="338" cy="420" r="5.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.2" filter="url(#dg)"/>
+  <text x="280" y="418" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">亞雅崙 Aijalon</text>
 
   <!-- Beit Shemesh -->
-  <circle cx="358" cy="436" r="5" fill="#e0e0e0" stroke="#ffee66" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="365" y="432" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">貝特謝梅什 Beit Shemesh</text>
+  <circle cx="356" cy="438" r="5" fill="#e0e0e0" stroke="#ffee66" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="363" y="434" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">貝特謝梅什 Beit Shemesh</text>
 
   <!-- Makkedah -->
-  <circle cx="315" cy="454" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="256" y="450" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">瑪基大</text>
-  <text x="256" y="462" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">Makkedah ? 五王被殺</text>
+  <circle cx="314" cy="456" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
+  <text x="254" y="452" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">瑪基大</text>
+  <text x="254" y="464" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">Makkedah ? 五王被殺</text>
 
   <!-- Azekah -->
-  <circle cx="333" cy="508" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="272" y="504" font-size="10.5" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">亞西加 Azekah</text>
+  <circle cx="328" cy="510" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
+  <text x="268" y="506" font-size="10.5" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">亞西加 Azekah</text>
 
   <!-- Libnah -->
-  <circle cx="370" cy="548" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="380" y="544" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">立拿 Libnah ?</text>
+  <circle cx="364" cy="552" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
+  <text x="374" y="548" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">立拿 Libnah ?</text>
 
   <!-- Lachish -->
-  <circle cx="332" cy="598" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
-  <text x="272" y="594" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">拉吉 Lachish</text>
+  <circle cx="328" cy="600" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
+  <text x="268" y="596" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">拉吉 Lachish</text>
 
   <!-- Eglon -->
-  <circle cx="290" cy="648" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="242" y="644" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">伊磯倫</text>
-  <text x="242" y="656" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">Eglon ?</text>
+  <circle cx="284" cy="652" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
+  <text x="236" y="648" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">伊磯倫</text>
+  <text x="236" y="660" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">Eglon ?</text>
 
   <!-- Hebron -->
-  <circle cx="490" cy="594" r="9" fill="#e0e0e0" stroke="#ffcc44" stroke-width="2.5" filter="url(#dg)"/>
-  <text x="502" y="588" font-size="12.5" fill="#ffe060" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">希伯崙 Hebron</text>
-  <text x="502" y="601" font-size="9" fill="#ffd040" font-family="Noto Serif TC" filter="url(#cl)">★ 迦勒所求之地</text>
+  <circle cx="484" cy="598" r="9" fill="#e0e0e0" stroke="#ffcc44" stroke-width="2.5" filter="url(#dg)"/>
+  <text x="496" y="592" font-size="12.5" fill="#ffe060" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">希伯崙 Hebron</text>
+  <text x="496" y="605" font-size="9" fill="#ffd040" font-family="Noto Serif TC" filter="url(#cl)">★ 迦勒所求之地</text>
 
   <!-- Debir -->
-  <circle cx="448" cy="678" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="458" y="673" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">底璧 Debir ?</text>
-  <text x="458" y="685" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">押撒求泉水</text>
+  <circle cx="442" cy="680" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
+  <text x="452" y="675" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">底璧 Debir ?</text>
+  <text x="452" y="687" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">押撒求泉水</text>
 
   <!-- Legend box -->
   <rect x="14" y="14" width="225" height="88" rx="7" fill="rgba(0,0,0,0.78)" stroke="#d4a830" stroke-width="1.2"/>
@@ -847,7 +910,7 @@ input[type=range] {
   </defs>
 
   <!-- A: March north from Gilgal to Waters of Merom -->
-  <path d="M 708 330 Q 680 270 620 220 Q 565 185 452 172"
+  <path d="M 668 342 Q 640 280 580 230 Q 530 192 452 172"
         stroke="#2288ee" stroke-width="5" fill="none" marker-end="url(#ab)" filter="url(#gb)" opacity="0.92"/>
   <!-- B: Merom → pursue west to Misrephoth Maim -->
   <path d="M 450 174 Q 370 148 255 125"
@@ -858,8 +921,8 @@ input[type=range] {
   <!-- D: Attack Hazor -->
   <path d="M 535 133 Q 505 132 470 138"
         stroke="#2288ee" stroke-width="5" fill="none" marker-end="url(#ab)" filter="url(#gb)" opacity="0.92"/>
-  <!-- Return -->
-  <path d="M 470 140 Q 560 200 650 310 Q 682 340 706 330"
+  <!-- Return to Gilgal -->
+  <path d="M 470 140 Q 530 190 600 270 Q 640 315 666 340"
         stroke="#2288ee" stroke-width="3" fill="none" stroke-dasharray="8,7" marker-end="url(#ab2)" filter="url(#gb)" opacity="0.45"/>
 
   <!-- Step badges -->
@@ -910,6 +973,7 @@ input[type=range] {
   </div><!-- end layer-north -->
 
 </div><!-- end map-wrap -->
+</div><!-- end fs-container -->
 
 <script>
 // ─── LAYER STATE ───
@@ -1128,11 +1192,11 @@ function restoreHighlight() {
 
 // ─── FULLSCREEN ───
 function toggleFS() {
-  const el = document.getElementById('map-wrap');
+  const el = document.getElementById('fs-container');
   if (!document.fullscreenElement) {
-    el.requestFullscreen && el.requestFullscreen();
+    (el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen).call(el);
   } else {
-    document.exitFullscreen && document.exitFullscreen();
+    (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
   }
 }
 
