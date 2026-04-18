@@ -131,38 +131,40 @@ button.btn-blue:hover, button.btn-blue.active { background: rgba(34,136,238,0.18
 .lesson-title {
   font-family: 'Cinzel', serif;
   color: var(--gold);
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   letter-spacing: 0.08em;
   flex: 1;
   text-align: center;
 }
 .lesson-dots {
   display: flex;
-  gap: 5px;
+  gap: 7px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 .lesson-dot {
-  width: 10px; height: 10px;
+  width: 13px; height: 13px;
   border-radius: 50%;
   background: rgba(212,168,48,0.2);
   border: 1px solid rgba(212,168,48,0.3);
   cursor: pointer;
   transition: all 0.15s;
 }
-.lesson-dot.active { background: var(--gold); border-color: var(--gold); transform: scale(1.3); }
+.lesson-dot.active { background: var(--gold); border-color: var(--gold); transform: scale(1.4); }
 .lesson-dot.done { background: rgba(212,168,48,0.5); }
 
 .lesson-text {
-  color: #d8b870;
-  font-size: 0.8rem;
-  line-height: 1.7;
+  color: #e8cc88;
+  font-size: 1.05rem;
+  line-height: 1.8;
   text-align: center;
-  min-height: 40px;
+  min-height: 48px;
 }
-.lesson-text strong { color: var(--gold); }
-.lesson-text .verse { color: #8a7050; font-size: 0.7rem; margin-top: 4px; display: block; }
+.lesson-text strong { color: var(--gold); font-size: 1.1rem; }
+.lesson-text .verse { color: #9a8060; font-size: 0.85rem; margin-top: 6px; display: block; }
+
+.lesson-title { font-size: 1.05rem !important; }
 
 /* ── MAP WRAPPER ── */
 .map-wrap {
@@ -171,6 +173,8 @@ button.btn-blue:hover, button.btn-blue.active { background: rgba(34,136,238,0.18
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 8px 40px rgba(0,0,0,0.8);
+  /* Critical: establish aspect ratio context */
+  aspect-ratio: 820 / 900;
 }
 
 /* Layers stacked via absolute positioning */
@@ -180,11 +184,16 @@ button.btn-blue:hover, button.btn-blue.active { background: rgba(34,136,238,0.18
   width: 100%; height: 100%;
   transition: opacity 0.4s ease;
 }
+/* All SVGs fill their container exactly */
 .map-layer svg { width: 100%; height: 100%; }
-
-/* The base SVG defines the height */
 .map-base { position: relative; }
-.map-base svg { width: 100%; height: auto; display: block; }
+.map-base svg { width: 100%; height: 100%; display: block; position: absolute; top:0; left:0; }
+/* Invisible spacer to drive the container height via aspect-ratio */
+.map-base::after {
+  content: '';
+  display: block;
+  padding-top: calc(900 / 820 * 100%);
+}
 
 /* Opacity controls */
 #layer-tribes { opacity: 0; pointer-events: none; }
@@ -192,30 +201,25 @@ button.btn-blue:hover, button.btn-blue.active { background: rgba(34,136,238,0.18
 #layer-north { opacity: 0; }
 
 /* ── OPACITY SLIDER ── */
-.opacity-row {
-  display: flex; align-items: center; gap: 8px;
-}
+.opacity-row { display: flex; align-items: center; gap: 8px; }
 .opacity-row label { font-size: 0.65rem; color: #8a6830; white-space: nowrap; }
-input[type=range] {
-  width: 80px;
-  accent-color: var(--gold);
-}
+input[type=range] { width: 80px; accent-color: var(--gold); }
 
 /* ── STEP HIGHLIGHT ── */
 .step-highlight { transition: opacity 0.3s; }
 
-/* ── FULLSCREEN ── */
+/* ── FULLSCREEN BUTTON ── */
 .fs-btn {
   position: absolute;
   top: 8px; right: 8px;
-  background: rgba(0,0,0,0.6);
-  border: 1px solid rgba(212,168,48,0.3);
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(212,168,48,0.4);
   color: var(--gold);
-  font-size: 0.7rem;
-  padding: 3px 7px;
-  border-radius: 3px;
+  font-size: 0.75rem;
+  padding: 4px 9px;
+  border-radius: 4px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;
 }
 
 /* ── FULLSCREEN CONTAINER ── */
@@ -227,31 +231,61 @@ input[type=range] {
   gap: 8px;
 }
 #fs-container .toolbar,
-#fs-container .lesson-bar {
-  width: 100%;
-}
-/* When actually fullscreen, fill viewport */
+#fs-container .lesson-bar { width: 100%; }
+
+/* ── FULLSCREEN: maintain aspect ratio, never stretch ── */
 #fs-container:fullscreen,
 #fs-container:-webkit-full-screen {
   width: 100vw;
   height: 100vh;
-  background: var(--bg);
-  overflow-y: auto;
-  padding: 8px;
+  background: #060402;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6px 10px;
   box-sizing: border-box;
+  overflow-y: auto;
+  gap: 6px;
 }
-#fs-container:fullscreen .map-wrap,
-#fs-container:-webkit-full-screen .map-wrap {
-  width: 100%;
-  flex: 1;
-}
+
+/* Toolbar stays full width in FS */
 #fs-container:fullscreen .toolbar,
 #fs-container:-webkit-full-screen .toolbar {
   width: 100%;
+  max-width: 100vw;
+  flex-shrink: 0;
 }
+
+/* Lesson bar stays full width in FS */
 #fs-container:fullscreen .lesson-bar,
 #fs-container:-webkit-full-screen .lesson-bar {
   width: 100%;
+  max-width: 100vw;
+  flex-shrink: 0;
+}
+#fs-container:fullscreen .lesson-text,
+#fs-container:-webkit-full-screen .lesson-text {
+  font-size: 1.2rem;
+}
+#fs-container:fullscreen .lesson-title,
+#fs-container:-webkit-full-screen .lesson-title {
+  font-size: 1.15rem !important;
+}
+
+/* Map: use ALL remaining height, keep 820:900 ratio, never exceed viewport width */
+#fs-container:fullscreen .map-wrap,
+#fs-container:-webkit-full-screen .map-wrap {
+  /* Let JS compute this, but default: fill available space keeping ratio */
+  flex: 1 1 auto;
+  min-height: 0;
+  width: auto !important;
+  /* max-width constrained by height */
+  max-height: calc(100vh - 180px); /* leave room for toolbar+lesson */
+  aspect-ratio: 820 / 900;
+  /* Never wider than viewport */
+  max-width: min(calc((100vh - 180px) * 820 / 900), 100vw);
+  margin: 0 auto;
 }
 </style>
 </head>
@@ -312,9 +346,9 @@ input[type=range] {
 <!-- LESSON PANEL -->
 <div class="lesson-bar" id="lesson-bar">
   <div class="lesson-nav">
-    <button onclick="lessonStep(-1)" style="padding:4px 12px">◀</button>
+    <button onclick="lessonStep(-1)" style="padding:7px 18px;font-size:1.1rem">◀</button>
     <div class="lesson-title" id="lesson-title">教學模式</div>
-    <button onclick="lessonStep(1)" style="padding:4px 12px">▶</button>
+    <button onclick="lessonStep(1)" style="padding:7px 18px;font-size:1.1rem">▶</button>
   </div>
   <div class="lesson-text" id="lesson-text"></div>
   <div class="lesson-dots" id="lesson-dots"></div>
@@ -1200,7 +1234,48 @@ function toggleFS() {
   }
 }
 
-// ─── KEYBOARD NAV ───
+// ─── FULLSCREEN ASPECT RATIO ENFORCEMENT ───
+// SVG viewBox is 820×900 → ratio = 820/900 ≈ 0.9111
+const MAP_RATIO = 820 / 900;
+
+function fitMapInFullscreen() {
+  const fsc = document.getElementById('fs-container');
+  const mapWrap = document.getElementById('map-wrap');
+  const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  if (!isFS) {
+    // Restore normal mode
+    mapWrap.style.width = '';
+    mapWrap.style.height = '';
+    mapWrap.style.maxWidth = '';
+    mapWrap.style.maxHeight = '';
+    return;
+  }
+  // Available height = viewport minus toolbar and lesson bar heights
+  const toolbar = document.querySelector('.toolbar');
+  const lessonBar = document.getElementById('lesson-bar');
+  const tbH = toolbar ? toolbar.offsetHeight : 0;
+  const lbH = (lessonBar && lessonBar.classList.contains('visible')) ? lessonBar.offsetHeight : 0;
+  const padding = 28; // top+bottom padding
+  const availH = window.screen.height - tbH - lbH - padding;
+  const availW = window.screen.width - 20;
+
+  // Fit map preserving ratio
+  let mapW = availW;
+  let mapH = mapW / MAP_RATIO;
+  if (mapH > availH) {
+    mapH = availH;
+    mapW = mapH * MAP_RATIO;
+  }
+  mapWrap.style.width = mapW + 'px';
+  mapWrap.style.height = mapH + 'px';
+  mapWrap.style.maxWidth = mapW + 'px';
+  mapWrap.style.maxHeight = mapH + 'px';
+  mapWrap.style.flex = 'none';
+}
+
+document.addEventListener('fullscreenchange', fitMapInFullscreen);
+document.addEventListener('webkitfullscreenchange', fitMapInFullscreen);
+window.addEventListener('resize', fitMapInFullscreen);
 document.addEventListener('keydown', e => {
   if (!currentLesson) return;
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') lessonStep(1);
