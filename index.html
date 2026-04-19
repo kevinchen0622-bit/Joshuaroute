@@ -2,1495 +2,899 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>約書亞記 10–15 互動教學地圖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>約書亞記 — 鉛筆素描地圖</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap');
-
-:root {
-  --gold: #d4a830;
-  --gold-dim: #8a6820;
-  --bg: #0d0906;
-  --panel: rgba(8,5,2,0.92);
-  --green: #22cc44;
-  --red: #ee3322;
-  --blue: #2288ee;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Noto+Serif+TC:wght@300;400;700&display=swap');
 * { margin:0; padding:0; box-sizing:border-box; }
-
 body {
-  background: var(--bg);
-  font-family: 'Noto Serif TC', serif;
+  background: radial-gradient(ellipse at center, #d8c89a 0%, #b8a870 55%, #98885a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 6px 44px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 4px 24px;
-  user-select: none;
 }
-
-/* ── TOP HEADER ── */
-.header {
-  width: min(820px, 100vw);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 12px;
-  margin-bottom: 8px;
+.wrap {
+  width: min(1060px, 99vw);
+  box-shadow:
+    0 0 0 1px #9a8040,
+    3px 3px 0 #c0a048,
+    7px 7px 0 #a88838,
+    12px 12px 35px rgba(0,0,0,0.55);
+  border-radius: 1px;
 }
-.title-block h1 {
-  font-family: 'Cinzel', serif;
-  color: var(--gold);
-  font-size: clamp(0.85rem, 2.5vw, 1.2rem);
-  letter-spacing: 0.12em;
-  text-shadow: 0 0 18px rgba(212,168,48,0.45);
-}
-.title-block p {
-  color: #6a5030;
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  margin-top: 2px;
-}
-
-/* ── CONTROL TOOLBAR ── */
-.toolbar {
-  width: min(820px, 100vw);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 8px 10px;
-  background: rgba(20,12,4,0.95);
-  border: 1px solid rgba(212,168,48,0.2);
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-
-.toolbar-section {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-.toolbar-label {
-  font-size: 0.58rem;
-  color: var(--gold-dim);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.btn-group { display: flex; gap: 4px; flex-wrap: wrap; }
-
-button {
-  font-family: 'Noto Serif TC', serif;
-  font-size: 0.72rem;
-  padding: 5px 10px;
-  border: 1px solid rgba(212,168,48,0.3);
-  border-radius: 4px;
-  background: rgba(30,18,6,0.9);
-  color: #c8a848;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-button:hover { background: rgba(212,168,48,0.15); border-color: var(--gold); color: var(--gold); }
-button.active {
-  background: rgba(212,168,48,0.22);
-  border-color: var(--gold);
-  color: var(--gold);
-  font-weight: bold;
-}
-button.btn-green { border-color: rgba(34,204,68,0.4); color: #66dd88; }
-button.btn-green:hover, button.btn-green.active { background: rgba(34,204,68,0.18); border-color: var(--green); color: var(--green); }
-button.btn-red { border-color: rgba(238,51,34,0.4); color: #ee8878; }
-button.btn-red:hover, button.btn-red.active { background: rgba(238,51,34,0.18); border-color: var(--red); color: var(--red); }
-button.btn-blue { border-color: rgba(34,136,238,0.4); color: #88bbee; }
-button.btn-blue:hover, button.btn-blue.active { background: rgba(34,136,238,0.18); border-color: var(--blue); color: var(--blue); }
-
-.divider { width: 1px; background: rgba(212,168,48,0.15); margin: 0 4px; align-self: stretch; }
-
-/* ── LESSON PANEL ── */
-.lesson-bar {
-  width: min(820px, 100vw);
-  background: rgba(12,8,2,0.96);
-  border: 1px solid rgba(212,168,48,0.25);
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 8px;
-  display: none;
-}
-.lesson-bar.visible { display: block; }
-
-.lesson-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.lesson-title {
-  font-family: 'Cinzel', serif;
-  color: var(--gold);
-  font-size: 1.05rem;
-  letter-spacing: 0.08em;
-  flex: 1;
-  text-align: center;
-}
-.lesson-dots {
-  display: flex;
-  gap: 7px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-.lesson-dot {
-  width: 13px; height: 13px;
-  border-radius: 50%;
-  background: rgba(212,168,48,0.2);
-  border: 1px solid rgba(212,168,48,0.3);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.lesson-dot.active { background: var(--gold); border-color: var(--gold); transform: scale(1.4); }
-.lesson-dot.done { background: rgba(212,168,48,0.5); }
-
-.lesson-text {
-  color: #e8cc88;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  text-align: center;
-  min-height: 48px;
-}
-.lesson-text strong { color: var(--gold); font-size: 1.1rem; }
-.lesson-text .verse { color: #9a8060; font-size: 0.85rem; margin-top: 6px; display: block; }
-
-.lesson-title { font-size: 1.05rem !important; }
-
-/* ── MAP WRAPPER ── */
-.map-wrap {
-  width: min(820px, 100vw);
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.8);
-  /* Critical: establish aspect ratio context */
-  aspect-ratio: 820 / 900;
-}
-
-/* Layers stacked via absolute positioning */
-.map-layer {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  transition: opacity 0.4s ease;
-}
-/* All SVGs fill their container exactly */
-.map-layer svg { width: 100%; height: 100%; }
-.map-base { position: relative; }
-.map-base svg { width: 100%; height: 100%; display: block; position: absolute; top:0; left:0; }
-/* Invisible spacer to drive the container height via aspect-ratio */
-.map-base::after {
-  content: '';
-  display: block;
-  padding-top: calc(900 / 820 * 100%);
-}
-
-/* Opacity controls */
-#layer-tribes { opacity: 0; pointer-events: none; }
-#layer-conquest { opacity: 1; }
-#layer-north { opacity: 0; }
-
-/* ── OPACITY SLIDER ── */
-.opacity-row { display: flex; align-items: center; gap: 8px; }
-.opacity-row label { font-size: 0.65rem; color: #8a6830; white-space: nowrap; }
-input[type=range] { width: 80px; accent-color: var(--gold); }
-
-/* ── STEP HIGHLIGHT ── */
-.step-highlight { transition: opacity 0.3s; }
-
-/* ── FULLSCREEN BUTTON ── */
-.fs-btn {
-  position: absolute;
-  top: 8px; right: 8px;
-  background: rgba(0,0,0,0.65);
-  border: 1px solid rgba(212,168,48,0.4);
-  color: var(--gold);
-  font-size: 0.75rem;
-  padding: 4px 9px;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 20;
-}
-
-/* ── FULLSCREEN CONTAINER ── */
-#fs-container {
-  width: min(820px, 100vw);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-#fs-container .toolbar,
-#fs-container .lesson-bar { width: 100%; }
-
-/* ── FULLSCREEN: maintain aspect ratio, never stretch ── */
-#fs-container:fullscreen,
-#fs-container:-webkit-full-screen {
-  width: 100vw;
-  height: 100vh;
-  background: #060402;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 6px 10px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  gap: 6px;
-}
-
-/* Toolbar stays full width in FS */
-#fs-container:fullscreen .toolbar,
-#fs-container:-webkit-full-screen .toolbar {
-  width: 100%;
-  max-width: 100vw;
-  flex-shrink: 0;
-}
-
-/* Lesson bar stays full width in FS */
-#fs-container:fullscreen .lesson-bar,
-#fs-container:-webkit-full-screen .lesson-bar {
-  width: 100%;
-  max-width: 100vw;
-  flex-shrink: 0;
-}
-#fs-container:fullscreen .lesson-text,
-#fs-container:-webkit-full-screen .lesson-text {
-  font-size: 1.2rem;
-}
-#fs-container:fullscreen .lesson-title,
-#fs-container:-webkit-full-screen .lesson-title {
-  font-size: 1.15rem !important;
-}
-
-/* Map: use ALL remaining height, keep 820:900 ratio, never exceed viewport width */
-#fs-container:fullscreen .map-wrap,
-#fs-container:-webkit-full-screen .map-wrap {
-  /* Let JS compute this, but default: fill available space keeping ratio */
-  flex: 1 1 auto;
-  min-height: 0;
-  width: auto !important;
-  /* max-width constrained by height */
-  max-height: calc(100vh - 180px); /* leave room for toolbar+lesson */
-  aspect-ratio: 820 / 900;
-  /* Never wider than viewport */
-  max-width: min(calc((100vh - 180px) * 820 / 900), 100vw);
-  margin: 0 auto;
+.wrap svg { width:100%; height:auto; display:block; }
+.note {
+  margin-top:14px;
+  color:#8a7040;
+  font-size:0.7rem;
+  font-family:'Caveat', cursive;
+  text-align:center;
+  letter-spacing:0.08em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 </style>
 </head>
 <body>
+<div class="wrap">
+<!--
+  COORDINATE SYSTEM  viewBox="0 0 1100 1040"
+  Wide canvas = room for labels on both sides
 
-<!-- HEADER -->
-<div class="header">
-  <div class="title-block">
-    <h1>約書亞記 10–15 章 互動教學地圖</h1>
-    <p>征服路線 × 支派分地 · 可分段切換 · 適合課堂教學</p>
-  </div>
+  KEY GEOGRAPHY (approx):
+    Coast (Med)    x ≈ 0–230
+    Hill country   x ≈ 280–520
+    Jordan River   x ≈ 640–660, y 100→590
+    Transjordan    x ≈ 670–900
+    Dead Sea right edge x ≈ 820
+
+    Galilee Sea    cx=672 cy=90
+    Dead Sea       cx=770 cy=640
+
+    North          y ≈ 0–200
+    Central        y ≈ 200–500
+    South/Negev    y ≈ 700–1040
+
+  CITIES:
+    Shittim        820  390
+    Gilgal         660  400  ← WEST bank, NW of Jericho
+    Jericho        648  430
+    Bethel         415  295
+    Ai             458  310  (?)
+    Gibeon         385  388
+    Jerusalem      458  465
+    Shiloh         498  262
+    LowerBH        335  345
+    UpperBH        362  380
+    Aijalon        305  415
+    Makkedah       275  452  (?)
+    Azekah         292  498
+    Libnah         322  535  (?)
+    Lachish        295  578
+    Eglon          258  622  (?)
+    Hebron         455  575
+    Debir          415  635  (?)
+    Beersheba      382  745
+    KadeshBarnea   360  848
+
+    Merom          415  175
+    Hazor          452  142
+    Misrephoth     228  130
+    MizpehV        515  138
+-->
+<svg viewBox="0 0 1100 1040" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <!-- Rich aged paper texture -->
+  <filter id="paper" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.58" numOctaves="5" seed="42" result="n1"/>
+    <feColorMatrix type="saturate" values="0.2" in="n1" result="n2"/>
+    <feBlend in="SourceGraphic" in2="n2" mode="multiply" result="b1"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.28" numOctaves="3" seed="7" result="n3"/>
+    <feColorMatrix type="saturate" values="0" in="n3" result="n4"/>
+    <feBlend in="b1" in2="n4" mode="overlay" result="b2"/>
+    <feComponentTransfer in="b2">
+      <feFuncR type="linear" slope="0.95" intercept="0.03"/>
+      <feFuncG type="linear" slope="0.92" intercept="0.02"/>
+      <feFuncB type="linear" slope="0.85" intercept="0.01"/>
+    </feComponentTransfer>
+  </filter>
+
+  <!-- Watercolor wash effect for land regions -->
+  <filter id="watercolor" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018 0.025" numOctaves="4" seed="19" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+    <feGaussianBlur in="displaced" stdDeviation="2.5" result="blurred"/>
+    <feBlend in="SourceGraphic" in2="blurred" mode="multiply" result="blend"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="3" seed="31" result="tex"/>
+    <feColorMatrix type="saturate" values="0.15" in="tex" result="tex2"/>
+    <feBlend in="blend" in2="tex2" mode="multiply"/>
+  </filter>
+
+  <!-- Pencil wobble for region outlines -->
+  <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="turbulence" baseFrequency="0.028 0.048" numOctaves="3" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <!-- Pencil wobble for route lines -->
+  <filter id="wobble2" x="-8%" y="-8%" width="116%" height="116%">
+    <feTurbulence type="turbulence" baseFrequency="0.022 0.065" numOctaves="2" seed="11" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <!-- Very light wobble for text -->
+  <filter id="wobble-text">
+    <feTurbulence type="turbulence" baseFrequency="0.035" numOctaves="1" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="1.0" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <!-- Drop shadow for boxes -->
+  <filter id="box-shadow">
+    <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="rgba(40,25,5,0.35)"/>
+  </filter>
+  <!-- Glow for route lines -->
+  <filter id="line-glow-g">
+    <feGaussianBlur stdDeviation="2.5" result="blur"/>
+    <feFlood flood-color="#3a8a1a" flood-opacity="0.4" result="c"/>
+    <feComposite in="c" in2="blur" operator="in" result="shadow"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="line-glow-r">
+    <feGaussianBlur stdDeviation="2.5" result="blur"/>
+    <feFlood flood-color="#9a1a08" flood-opacity="0.4" result="c"/>
+    <feComposite in="c" in2="blur" operator="in" result="shadow"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="line-glow-b">
+    <feGaussianBlur stdDeviation="2.5" result="blur"/>
+    <feFlood flood-color="#1a3a9a" flood-opacity="0.35" result="c"/>
+    <feComposite in="c" in2="blur" operator="in" result="shadow"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <!-- Hatching patterns (hand-drawn feel) -->
+  <pattern id="h-light" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(22)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#9a8a5a" stroke-width="0.6" opacity="0.48"/>
+  </pattern>
+  <pattern id="h-med" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)">
+    <line x1="0" y1="0" x2="0" y2="5" stroke="#8a7a4a" stroke-width="0.8" opacity="0.55"/>
+  </pattern>
+  <pattern id="h-cross" x="0" y="0" width="7" height="7" patternUnits="userSpaceOnUse">
+    <line x1="0" y1="0" x2="7" y2="7" stroke="#7a6a3a" stroke-width="0.75" opacity="0.55"/>
+    <line x1="7" y1="0" x2="0" y2="7" stroke="#7a6a3a" stroke-width="0.75" opacity="0.55"/>
+  </pattern>
+  <pattern id="h-east" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(14)">
+    <line x1="0" y1="0" x2="0" y2="8" stroke="#aa9860" stroke-width="0.55" opacity="0.42"/>
+  </pattern>
+
+  <!-- Watercolor fills for tribes -->
+  <linearGradient id="wc-north" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#b8d898" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#98c078" stop-opacity="0.45"/>
+  </linearGradient>
+  <linearGradient id="wc-central" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#a8d088" stop-opacity="0.5"/>
+    <stop offset="100%" stop-color="#88b868" stop-opacity="0.4"/>
+  </linearGradient>
+  <linearGradient id="wc-judah" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0%" stop-color="#90c070" stop-opacity="0.6"/>
+    <stop offset="60%" stop-color="#78a858" stop-opacity="0.5"/>
+    <stop offset="100%" stop-color="#608840" stop-opacity="0.4"/>
+  </linearGradient>
+  <linearGradient id="wc-east" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#d8b878" stop-opacity="0.5"/>
+    <stop offset="100%" stop-color="#c0a060" stop-opacity="0.4"/>
+  </linearGradient>
+
+  <!-- Arrow markers (hand-drawn, slightly irregular) -->
+  <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0.5 0.5 Q4 2 9 5 Q4 8 0.5 9.5 L2.5 5 Z" fill="#1a5a10" stroke="#1a5a10" stroke-width="0.3"/>
+  </marker>
+  <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0.5 0.5 Q4 2 9 5 Q4 8 0.5 9.5 L2.5 5 Z" fill="#7a1208" stroke="#7a1208" stroke-width="0.3"/>
+  </marker>
+  <marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0.5 0.5 Q4 2 9 5 Q4 8 0.5 9.5 L2.5 5 Z" fill="#1a3888" stroke="#1a3888" stroke-width="0.3"/>
+  </marker>
+  <marker id="ab2" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+    <path d="M0.5 0.5 Q3 2 6.5 3.5 Q3 5 0.5 6.5 L2 3.5 Z" fill="#1a3888" stroke="#1a3888" stroke-width="0.3"/>
+  </marker>
+  <marker id="ar2" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+    <path d="M0.5 0.5 Q3 2 6.5 3.5 Q3 5 0.5 6.5 L2 3.5 Z" fill="#7a1208" stroke="#7a1208" stroke-width="0.3"/>
+  </marker>
+</defs>
+
+<!-- ════════════════════════════════════ -->
+<!-- PAPER — aged, stained, with vignette -->
+<!-- ════════════════════════════════════ -->
+<!-- Base warm parchment -->
+<rect width="1100" height="1040" fill="#f2e8c8"/>
+<!-- Age staining layer -->
+<rect width="1100" height="1040" fill="#c8a858" filter="url(#paper)" opacity="0.32"/>
+<!-- Second noise pass for depth -->
+<rect width="1100" height="1040" fill="#d4b870" filter="url(#paper)" opacity="0.18"/>
+<!-- Vignette (darkened edges) -->
+<radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+  <stop offset="0%" stop-color="transparent"/>
+  <stop offset="100%" stop-color="rgba(60,35,5,0.38)"/>
+</radialGradient>
+<rect width="1100" height="1040" fill="url(#vignette)"/>
+<!-- Top and bottom edge darkening (worn) -->
+<rect width="1100" height="60" fill="rgba(40,22,5,0.12)"/>
+<rect y="980" width="1100" height="60" fill="rgba(40,22,5,0.12)"/>
+
+<!-- ════════════════════════════════════ -->
+<!-- DECORATIVE FRAME (ornate hand-drawn) -->
+<!-- ════════════════════════════════════ -->
+<!-- Outer border — thick, slightly wobbly -->
+<rect x="10" y="10" width="1080" height="1020" fill="none"
+  stroke="#7a5a1a" stroke-width="3.5" filter="url(#wobble)" opacity="0.7"/>
+<!-- Inner border — thinner -->
+<rect x="20" y="20" width="1060" height="1000" fill="none"
+  stroke="#9a7830" stroke-width="1.5" filter="url(#wobble)" opacity="0.55"/>
+<!-- Corner ornaments (hand-drawn cross-hatch corners) -->
+<g stroke="#7a5a1a" stroke-width="1.2" fill="none" opacity="0.6" filter="url(#wobble)">
+  <!-- Top-left -->
+  <path d="M 10 10 L 48 10 M 10 10 L 10 48 M 18 18 L 45 18 M 18 18 L 18 45"/>
+  <path d="M 28 28 L 42 28 M 28 28 L 28 42"/>
+  <!-- Top-right -->
+  <path d="M 1090 10 L 1052 10 M 1090 10 L 1090 48 M 1082 18 L 1055 18 M 1082 18 L 1082 45"/>
+  <path d="M 1072 28 L 1058 28 M 1072 28 L 1072 42"/>
+  <!-- Bottom-left -->
+  <path d="M 10 1030 L 48 1030 M 10 1030 L 10 992 M 18 1022 L 45 1022 M 18 1022 L 18 995"/>
+  <path d="M 28 1012 L 42 1012 M 28 1012 L 28 998"/>
+  <!-- Bottom-right -->
+  <path d="M 1090 1030 L 1052 1030 M 1090 1030 L 1090 992 M 1082 1022 L 1055 1022 M 1082 1022 L 1082 995"/>
+  <path d="M 1072 1012 L 1058 1012 M 1072 1012 L 1072 998"/>
+</g>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- WATER: MEDITERRANEAN — deeper blue-grey wash    -->
+<!-- ════════════════════════════════════════════════ -->
+<path d="M 0 0 L 215 0 L 205 110 L 195 220 L 185 330
+  L 178 440 L 175 550 L 178 660 L 182 770
+  L 188 880 L 195 1040 L 0 1040 Z"
+  fill="#c8dff0" filter="url(#watercolor)" opacity="0.9"/>
+<!-- Water depth shadow along coast -->
+<path d="M 180 0 L 215 0 L 205 110 L 195 220 L 185 330
+  L 178 440 L 175 550 L 178 660 L 182 770
+  L 188 880 L 180 1040 L 165 1040
+  L 170 880 L 165 770 L 162 660 L 162 550 L 162 440
+  L 165 330 L 170 220 L 178 110 L 185 0 Z"
+  fill="#a0c8e0" opacity="0.35" filter="url(#wobble)"/>
+<!-- Wave lines — more varied -->
+<g stroke="#6898ba" fill="none" opacity="0.5">
+  <path d="M 25 105 Q 55 99 88 105 Q 118 111 150 105 Q 170 101 188 105" stroke-width="1.2" filter="url(#wobble2)"/>
+  <path d="M 22 185 Q 54 179 90 185 Q 125 191 158 185 Q 175 181 192 185" stroke-width="1" filter="url(#wobble2)"/>
+  <path d="M 25 275 Q 60 269 96 275 Q 130 281 162 275" stroke-width="1.1" filter="url(#wobble2)"/>
+  <path d="M 22 368 Q 58 362 94 368 Q 128 374 160 368" stroke-width="1" filter="url(#wobble2)"/>
+  <path d="M 24 462 Q 60 456 96 462 Q 130 468 162 462" stroke-width="1" filter="url(#wobble2)"/>
+  <path d="M 22 558 Q 58 552 94 558 Q 128 564 160 558" stroke-width="0.9" filter="url(#wobble2)"/>
+  <path d="M 24 655 Q 60 649 96 655 Q 130 661 162 655" stroke-width="0.9" filter="url(#wobble2)"/>
+  <path d="M 26 752 Q 62 746 98 752 Q 132 758 164 752" stroke-width="0.9" filter="url(#wobble2)"/>
+  <path d="M 28 848 Q 64 842 100 848 Q 134 854 166 848" stroke-width="0.85" filter="url(#wobble2)"/>
+  <path d="M 30 945 Q 66 939 102 945 Q 136 951 168 945" stroke-width="0.8" filter="url(#wobble2)"/>
+</g>
+<text x="98" y="520" font-size="13.5" fill="#4a7898" font-family="Caveat" text-anchor="middle"
+  transform="rotate(-90,98,520)" letter-spacing="5" opacity="0.7" filter="url(#wobble-text)">地　中　海</text>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- LAND — layered watercolor washes               -->
+<!-- ════════════════════════════════════════════════ -->
+<!-- Base land (warm sand) -->
+<path d="M 210 0 L 670 0 L 678 100 L 690 150
+  L 900 150 L 900 1040 L 210 1040
+  L 192 960 L 182 870 L 185 780 L 175 690
+  L 170 600 L 172 510 L 168 420 L 170 330
+  L 175 240 L 182 150 L 192 65 Z"
+  fill="#e0d098" filter="url(#watercolor)" opacity="0.9"/>
+<!-- Second wash (slightly warmer mid-tones) -->
+<path d="M 218 0 L 620 0 L 628 85 L 640 140
+  L 880 140 L 885 520 L 880 900 L 870 1040 L 218 1040
+  L 200 960 L 192 870 L 195 780 L 185 690
+  L 180 600 L 182 510 L 178 420 L 180 330
+  L 185 240 L 192 150 L 202 65 Z"
+  fill="#c8b870" opacity="0.2" filter="url(#watercolor)"/>
+<!-- Coastal plain (lighter, flatter) -->
+<path d="M 212 40 L 380 0 L 650 0 L 655 75 L 665 130
+  L 430 250 L 398 360 L 375 460 L 355 560
+  L 340 660 L 328 760 L 318 860 L 308 960 L 295 1040
+  L 210 1040 L 192 960 L 182 870 L 185 780 L 175 690
+  L 170 600 L 172 510 L 168 420 L 170 330
+  L 175 240 L 182 150 L 192 65 Z"
+  fill="#e8dcb0" opacity="0.28" filter="url(#wobble)"/>
+
+<!-- Hill country — deep shadow ridge -->
+<path d="M 345 55 L 438 38 L 508 90 L 520 200 L 508 318
+  L 492 435 L 478 552 L 462 668 L 440 775 L 415 858
+  L 382 892 L 348 900 L 325 858 L 318 775
+  L 315 668 L 318 552 L 322 435 L 328 318
+  L 332 200 L 338 120 Z"
+  fill="url(#h-light)" opacity="0.88"/>
+<!-- Hill country shadow overlay -->
+<path d="M 362 55 L 430 45 L 492 95 L 500 200 L 490 318
+  L 476 435 L 462 552 L 448 668 L 428 775 L 405 855
+  L 380 885 L 355 892 L 336 855 L 328 775
+  L 325 668 L 328 552 L 332 435 L 338 318
+  L 342 200 L 348 118 Z"
+  fill="#a09055" opacity="0.12" filter="url(#watercolor)"/>
+
+<!-- Negev/desert tint (south) -->
+<path d="M 210 820 L 620 820 L 610 1040 L 210 1040 L 192 960 Z"
+  fill="#d4c080" opacity="0.25" filter="url(#wobble)"/>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- SEA OF GALILEE — richer blue watercolor      -->
+<!-- ════════════════════════════════════════════ -->
+<ellipse cx="672" cy="90" rx="36" ry="25" fill="#a8d5f0" filter="url(#watercolor)" opacity="0.92"/>
+<ellipse cx="672" cy="90" rx="33" ry="22" fill="none" stroke="#4a7a9a" stroke-width="1.5" filter="url(#wobble)" opacity="0.7"/>
+<path d="M 645 88 Q 660 82 675 86 Q 690 90 705 86" stroke="#5a8aaa" stroke-width="1.2" fill="none" opacity="0.65" filter="url(#wobble2)"/>
+<path d="M 648 96 Q 663 91 678 95 Q 692 99 704 95" stroke="#5a8aaa" stroke-width="0.9" fill="none" opacity="0.5" filter="url(#wobble2)"/>
+<text x="672" y="88" text-anchor="middle" font-size="10" fill="#2a5878" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">加利利海</text>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- DEAD SEA — rich deep blue                    -->
+<!-- ════════════════════════════════════════════ -->
+<path d="M 710 572 Q 752 558 775 592 Q 798 630 790 688
+  Q 782 748 752 765 Q 720 775 698 752
+  Q 675 722 678 680 Q 680 635 710 572 Z"
+  fill="#90c8e8" filter="url(#watercolor)" opacity="0.92"/>
+<path d="M 712 574 Q 752 561 774 594 Q 796 631 788 686
+  Q 780 744 751 762 Q 721 772 700 750
+  Q 678 722 680 681 Z"
+  fill="none" stroke="#4a7a9a" stroke-width="1.5" filter="url(#wobble)" opacity="0.65"/>
+<path d="M 695 630 Q 722 621 750 629 Q 770 634 784 628" stroke="#4a7898" stroke-width="1.1" fill="none" opacity="0.6" filter="url(#wobble2)"/>
+<path d="M 692 660 Q 720 652 748 660 Q 768 665 782 660" stroke="#4a7898" stroke-width="0.9" fill="none" opacity="0.48" filter="url(#wobble2)"/>
+<text x="738" y="672" text-anchor="middle" font-size="13" fill="#2a5878" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">死　海</text>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- JORDAN RIVER — sinuous, rich blue            -->
+<!-- ════════════════════════════════════════════ -->
+<!-- Wide glow -->
+<path d="M 660 115 Q 652 180 655 262 Q 658 345 654 428 Q 650 490 652 550 Q 654 568 656 572"
+  stroke="#88c5e0" stroke-width="12" fill="none" opacity="0.3" stroke-linecap="round" filter="url(#wobble2)"/>
+<!-- Main body -->
+<path d="M 660 115 Q 652 180 655 262 Q 658 345 654 428 Q 650 490 652 550 Q 654 568 656 572"
+  stroke="#5a9ab5" stroke-width="5" fill="none" opacity="0.88" stroke-linecap="round" filter="url(#wobble2)"/>
+<!-- Highlight -->
+<path d="M 658 115 Q 650 180 653 262 Q 656 345 652 428 Q 648 490 650 550"
+  stroke="#a8d8f0" stroke-width="1.5" fill="none" opacity="0.55" stroke-linecap="round" filter="url(#wobble2)"/>
+<!-- Dashed border between east/west -->
+<line x1="655" y1="115" x2="655" y2="572" stroke="#3a6888" stroke-width="1.5" stroke-dasharray="10,7" opacity="0.35" filter="url(#wobble2)"/>
+<text x="633" y="348" font-size="11.5" fill="#3a7898" font-family="Caveat" transform="rotate(-87,633,348)" opacity="0.85" filter="url(#wobble-text)">約　但　河</text>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- MOUNTAIN SYMBOLS — hand-drawn ridges         -->
+<!-- ════════════════════════════════════════════ -->
+<g stroke="#6a5a30" fill="#c8aa60" opacity="0.72" filter="url(#wobble)">
+  <!-- Mt Carmel range -->
+  <path d="M 220 198 L 238 172 L 256 184 L 238 202 Z" stroke-width="1.2"/>
+  <path d="M 238 178 L 252 158 L 268 170 L 252 186 Z" stroke-width="1.2"/>
+  <path d="M 254 184 L 268 165 L 282 176 L 268 192 Z" stroke-width="1.2"/>
+  <!-- Central highlands - north cluster -->
+  <path d="M 335 245 L 352 222 L 368 234 L 352 252 Z" stroke-width="1.1"/>
+  <path d="M 352 228 L 366 208 L 380 220 L 366 238 Z" stroke-width="1.1"/>
+  <!-- Central - mid cluster -->
+  <path d="M 328 330 L 345 305 L 362 318 L 345 338 Z" stroke-width="1.1"/>
+  <path d="M 345 310 L 358 290 L 372 302 L 358 320 Z" stroke-width="1.1"/>
+  <!-- Hebron hills cluster -->
+  <path d="M 368 545 L 385 520 L 402 532 L 385 552 Z" stroke-width="1.1"/>
+  <path d="M 385 526 L 400 504 L 415 516 L 400 535 Z" stroke-width="1.1"/>
+  <path d="M 402 532 L 418 510 L 432 522 L 418 540 Z" stroke-width="1.1"/>
+  <!-- Southern highlands -->
+  <path d="M 345 415 L 360 393 L 374 405 L 360 422 Z" stroke-width="1"/>
+  <path d="M 360 400 L 373 380 L 386 392 L 373 410 Z" stroke-width="1"/>
+</g>
+
+<!-- ════════════════════════════════ -->
+<!-- TRIBAL REGIONS                   -->
+<!-- ════════════════════════════════ -->
+
+<!-- ASHER (NW coastal) -->
+<path d="M 210 0 L 308 0 L 302 78 L 282 138 L 255 168 L 230 180 L 210 158 L 200 108 Z"
+  fill="#b8e098" filter="url(#watercolor)" opacity="0.45"/>
+<path d="M 210 0 L 308 0 L 302 78 L 282 138 L 255 168 L 230 180 L 210 158 L 200 108 Z"
+  fill="none" stroke="#3a5820" stroke-width="1.8" filter="url(#wobble)"/>
+<path d="M 210 0 L 308 0 L 302 78 L 282 138 L 255 168 L 230 180 L 210 158 L 200 108 Z"
+  fill="url(#h-light)" opacity="0.6"/>
+
+<!-- NAPHTALI (N Galilee) -->
+<path d="M 308 0 L 628 0 L 638 80 L 650 115 L 625 140 L 588 152 L 548 148 L 505 140 L 460 130 L 412 118 L 368 105 L 330 92 L 302 78 Z"
+  fill="#a8cc88" filter="url(#watercolor)" opacity="0.42"/>
+<path d="M 308 0 L 628 0 L 638 80 L 650 115 L 625 140 L 588 152 L 548 148 L 505 140 L 460 130 L 412 118 L 368 105 L 330 92 L 302 78 Z"
+  fill="none" stroke="#3a5820" stroke-width="1.8" filter="url(#wobble)"/>
+<path d="M 308 0 L 628 0 L 638 80 L 650 115 L 625 140 L 588 152 L 548 148 L 505 140 L 460 130 L 412 118 L 368 105 L 330 92 L 302 78 Z"
+  fill="url(#h-light)" opacity="0.5"/>
+
+<!-- ZEBULUN -->
+<path d="M 255 168 L 282 138 L 302 78 L 330 92 L 368 105 L 412 118 L 460 130 L 505 140 L 548 148 L 588 152 L 615 188 L 598 208 L 558 218 L 515 215 L 470 210 L 425 205 L 382 200 L 342 195 L 310 188 Z"
+  fill="#b8e0a0" filter="url(#watercolor)" opacity="0.46"/>
+<path d="M 255 168 L 282 138 L 302 78 L 330 92 L 368 105 L 412 118 L 460 130 L 505 140 L 548 148 L 588 152 L 615 188 L 598 208 L 558 218 L 515 215 L 470 210 L 425 205 L 382 200 L 342 195 L 310 188 Z"
+  fill="none" stroke="#3a5820" stroke-width="1.8" filter="url(#wobble)"/>
+
+<!-- ISSACHAR (Jezreel plain) -->
+<path d="M 310 188 L 342 195 L 382 200 L 425 205 L 470 210 L 515 215 L 558 218 L 598 208 L 618 248 L 600 268 L 558 278 L 512 282 L 465 278 L 418 275 L 372 270 L 330 264 L 305 255 Z"
+  fill="#c8f0a0" filter="url(#watercolor)" opacity="0.5"/>
+<path d="M 310 188 L 342 195 L 382 200 L 425 205 L 470 210 L 515 215 L 558 218 L 598 208 L 618 248 L 600 268 L 558 278 L 512 282 L 465 278 L 418 275 L 372 270 L 330 264 L 305 255 Z"
+  fill="none" stroke="#3a5820" stroke-width="1.8" filter="url(#wobble)"/>
+
+<!-- W. MANASSEH -->
+<path d="M 230 180 L 255 168 L 310 188 L 305 255 L 330 264 L 372 270 L 418 275 L 465 278 L 512 282 L 558 278 L 600 268 L 618 318 L 600 338 L 555 345 L 508 348 L 460 345 L 412 342 L 365 338 L 318 332 L 285 322 L 260 305 L 242 272 L 238 235 Z"
+  fill="#a8d088" filter="url(#watercolor)" opacity="0.46"/>
+<path d="M 230 180 L 255 168 L 310 188 L 305 255 L 330 264 L 372 270 L 418 275 L 465 278 L 512 282 L 558 278 L 600 268 L 618 318 L 600 338 L 555 345 L 508 348 L 460 345 L 412 342 L 365 338 L 318 332 L 285 322 L 260 305 L 242 272 L 238 235 Z"
+  fill="none" stroke="#3a5820" stroke-width="1.8" filter="url(#wobble)"/>
+
+<!-- EPHRAIM -->
+<path d="M 285 322 L 318 332 L 365 338 L 412 342 L 460 345 L 508 348 L 555 345 L 600 338 L 618 388 L 600 405 L 552 412 L 502 415 L 452 412 L 402 408 L 352 402 L 308 395 L 278 382 L 272 355 Z"
+  fill="#98c878" filter="url(#watercolor)" opacity="0.48"/>
+<path d="M 285 322 L 318 332 L 365 338 L 412 342 L 460 345 L 508 348 L 555 345 L 600 338 L 618 388 L 600 405 L 552 412 L 502 415 L 452 412 L 402 408 L 352 402 L 308 395 L 278 382 L 272 355 Z"
+  fill="none" stroke="#3a5820" stroke-width="1.8" filter="url(#wobble)"/>
+
+<!-- DAN (coastal strip, later migrated N) -->
+<path d="M 170 320 L 285 322 L 272 355 L 278 382 L 262 400 L 235 408 L 205 402 L 172 380 Z"
+  fill="none" stroke="#4a6a38" stroke-width="1.8" filter="url(#wobble)"/>
+<path d="M 170 320 L 285 322 L 272 355 L 278 382 L 262 400 L 235 408 L 205 402 L 172 380 Z"
+  fill="url(#h-cross)" opacity="0.55"/>
+
+<!-- BENJAMIN -->
+<path d="M 308 395 L 352 402 L 402 408 L 452 412 L 502 415 L 552 412 L 600 405 L 618 462 L 600 478 L 550 484 L 500 486 L 450 484 L 400 480 L 350 475 L 308 468 L 280 452 L 272 425 Z"
+  fill="#e0d888" filter="url(#watercolor)" opacity="0.48"/>
+<path d="M 308 395 L 352 402 L 402 408 L 452 412 L 502 415 L 552 412 L 600 405 L 618 462 L 600 478 L 550 484 L 500 486 L 450 484 L 400 480 L 350 475 L 308 468 L 280 452 L 272 425 Z"
+  fill="none" stroke="#3a5820" stroke-width="1.8" filter="url(#wobble)"/>
+
+<!-- JUDAH (large south territory) -->
+<path d="M 172 380 L 205 402 L 235 408 L 262 400 L 280 452 L 308 468 L 350 475 L 400 480 L 450 484 L 500 486 L 550 484 L 600 478 L 618 558 L 602 645 L 575 730 L 538 805 L 495 858 L 448 882 L 400 892 L 352 882 L 305 855 L 268 818 L 242 770 L 222 718 L 210 660 L 200 598 L 192 535 L 185 468 Z"
+  fill="#88b860" filter="url(#watercolor)" opacity="0.52"/>
+<path d="M 172 380 L 205 402 L 235 408 L 262 400 L 280 452 L 308 468 L 350 475 L 400 480 L 450 484 L 500 486 L 550 484 L 600 478 L 618 558 L 602 645 L 575 730 L 538 805 L 495 858 L 448 882 L 400 892 L 352 882 L 305 855 L 268 818 L 242 770 L 222 718 L 210 660 L 200 598 L 192 535 L 185 468 Z"
+  fill="none" stroke="#3a5820" stroke-width="2.2" stroke-width="2.2" filter="url(#wobble)"/>
+
+<!-- SIMEON (inside Judah S) -->
+<path d="M 275 745 L 408 752 L 410 828 L 378 842 L 338 840 L 300 822 L 272 798 L 268 768 Z"
+  fill="url(#h-med)" opacity="0.55"/>
+<path d="M 275 745 L 408 752 L 410 828 L 378 842 L 338 840 L 300 822 L 272 798 L 268 768 Z"
+  fill="none" stroke="#4a6a38" stroke-width="1.5" filter="url(#wobble)"/>
+
+<!-- PHILISTINE coast (unconquered) — strong sandy-red, clearly marked -->
+<!-- Background fill — warm sandy-orange to stand out from green Judah -->
+<path d="M 172 380 L 185 468 L 192 535 L 175 505 L 168 445 L 165 385 Z"
+  fill="#d4922a" filter="url(#watercolor)" opacity="0.55"/>
+<!-- Cross-hatch over it -->
+<path d="M 172 380 L 185 468 L 192 535 L 175 505 L 168 445 L 165 385 Z"
+  fill="url(#h-cross)" opacity="0.85"/>
+<!-- Bold border -->
+<path d="M 172 380 L 185 468 L 192 535 L 175 505 L 168 445 L 165 385 Z"
+  fill="none" stroke="#8a3810" stroke-width="2.2" stroke-dasharray="6,3" filter="url(#wobble)" opacity="0.9"/>
+<!-- Label directly on the strip — pointing left -->
+<line x1="172" y1="458" x2="108" y2="490" stroke="#7a3010" stroke-width="1.2" opacity="0.7" filter="url(#wobble2)"/>
+<text x="105" y="478" font-size="13" fill="#7a2808" font-family="Caveat" font-weight="700" filter="url(#wobble-text)" text-anchor="end">非利士地</text>
+<text x="105" y="492" font-size="11" fill="#8a3818" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">⚠ 未得之地</text>
+<text x="105" y="505" font-size="10" fill="#9a4828" font-family="Caveat" filter="url(#wobble-text)" text-anchor="end">書13:2-3</text>
+
+<!-- EAST TRIBES (Transjordan) x=660→900 -->
+<!-- E. Manasseh: Bashan + N Gilead -->
+<path d="M 660 115 L 900 115 L 900 338 L 660 338 L 652 258 L 650 188 Z"
+  fill="url(#h-east)" opacity="0.78"/>
+<path d="M 660 115 L 900 115 L 900 338 L 660 338 L 652 258 L 650 188 Z"
+  fill="none" stroke="#8a7040" stroke-width="1.8" filter="url(#wobble)"/>
+
+<!-- Gad: S Gilead + Jordan plain -->
+<path d="M 655 338 L 900 338 L 900 488 L 655 488 L 650 428 L 650 378 Z"
+  fill="url(#h-east)" opacity="0.65"/>
+<path d="M 655 338 L 900 338 L 900 488 L 655 488 L 650 428 L 650 378 Z"
+  fill="none" stroke="#8a7040" stroke-width="1.8" filter="url(#wobble)"/>
+
+<!-- Reuben: Moab plateau -->
+<path d="M 652 488 L 900 488 L 900 645 L 652 645 L 650 572 L 650 525 Z"
+  fill="url(#h-east)" opacity="0.58"/>
+<path d="M 652 488 L 900 488 L 900 645 L 652 645 L 650 572 L 650 525 Z"
+  fill="none" stroke="#8a7040" stroke-width="1.8" filter="url(#wobble)"/>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- CONQUEST ROUTES                                       -->
+<!-- ════════════════════════════════════════════════════ -->
+
+<!-- ── CENTRAL / GREEN  Josh 6–9 ── -->
+<!-- 1: Shittim → Gilgal (cross Jordan) -->
+<path d="M 818 392 Q 762 394 663 401"
+  stroke="#1a5010" stroke-width="6" fill="none" marker-end="url(#ag)" filter="url(#line-glow-g)" opacity="0.9" stroke-linecap="round"/>
+<!-- 2: Gilgal → Jericho -->
+<path d="M 660 403 Q 655 416 648 432"
+  stroke="#1a5010" stroke-width="6" fill="none" marker-end="url(#ag)" filter="url(#line-glow-g)" opacity="0.9" stroke-linecap="round"/>
+<!-- 3: Jericho → Bethel/Ai hill country -->
+<path d="M 646 430 Q 580 385 460 310"
+  stroke="#1a5010" stroke-width="6" fill="none" marker-end="url(#ag)" filter="url(#line-glow-g)" opacity="0.9" stroke-linecap="round"/>
+<!-- 4: Ai → Gibeon (Hivite deception) -->
+<path d="M 456 312 Q 428 352 388 386"
+  stroke="#1a5010" stroke-width="5.5" fill="none" marker-end="url(#ag)" filter="url(#line-glow-g)" opacity="0.9" stroke-linecap="round"/>
+<!-- 5: Night march Gilgal → Gibeon (rescue ch.10) dashed -->
+<path d="M 660 403 Q 558 408 390 388"
+  stroke="#1a5010" stroke-width="4.5" fill="none" stroke-dasharray="14,7" marker-end="url(#ag)" filter="url(#line-glow-g)" opacity="0.72" stroke-linecap="round"/>
+
+<!-- ── SOUTHERN / RED  Josh 10 ── -->
+<!-- 6: Gibeon → Upper BH (pursuit W) -->
+<path d="M 384 388 Q 362 378 363 380"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- 7: Upper BH → Lower BH (descent) -->
+<path d="M 361 381 Q 348 362 336 346"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- 8: Lower BH → Aijalon valley area -->
+<path d="M 334 347 Q 322 380 306 415"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- 9: Makkedah / SW pursuit -->
+<path d="M 304 416 Q 288 432 276 452"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- 10: Azekah -->
+<path d="M 275 454 Q 282 474 292 498"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- 11: Libnah -->
+<path d="M 294 500 Q 308 518 322 535"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- 12: Lachish -->
+<path d="M 322 537 Q 310 557 296 578"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- 13: Eglon loop -->
+<path d="M 295 580 Q 278 600 260 622"
+  stroke="#7a1008" stroke-width="5.5" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<path d="M 259 625 Q 278 603 297 582 Q 372 572 454 575"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- 14: Hebron → Debir -->
+<path d="M 456 578 Q 438 606 416 635"
+  stroke="#7a1008" stroke-width="6" fill="none" marker-end="url(#ar)" filter="url(#line-glow-r)" opacity="0.9" stroke-linecap="round"/>
+<!-- Return to Gilgal (faint) -->
+<path d="M 416 638 Q 518 615 658 415"
+  stroke="#7a1a08" stroke-width="2" fill="none" stroke-dasharray="9,9" marker-end="url(#ar2)" opacity="0.22" filter="url(#wobble2)"/>
+
+<!-- ── NORTHERN / BLUE  Josh 11 ── -->
+<!-- A: Gilgal → Waters of Merom -->
+<path d="M 660 400 Q 635 332 572 265 Q 520 215 418 177"
+  stroke="#1a3888" stroke-width="6" fill="none" marker-end="url(#ab)" filter="url(#line-glow-b)" opacity="0.9" stroke-linecap="round"/>
+<!-- B: Merom → Misrephoth Maim (W pursuit) -->
+<path d="M 414 177 Q 342 152 230 132"
+  stroke="#1a3888" stroke-width="4.5" fill="none" stroke-dasharray="13,6" marker-end="url(#ab2)" filter="url(#line-glow-b)" opacity="0.82" stroke-linecap="round"/>
+<!-- C: Merom → Mizpeh valley (E pursuit) -->
+<path d="M 414 177 Q 462 152 514 140"
+  stroke="#1a3888" stroke-width="4.5" fill="none" stroke-dasharray="13,6" marker-end="url(#ab2)" filter="url(#line-glow-b)" opacity="0.82" stroke-linecap="round"/>
+<!-- Hazor attack -->
+<path d="M 514 141 Q 486 138 454 142"
+  stroke="#1a3888" stroke-width="6" fill="none" marker-end="url(#ab)" filter="url(#line-glow-b)" opacity="0.9" stroke-linecap="round"/>
+
+<!-- ════════════════════════════════ -->
+<!-- STEP BADGES                      -->
+<!-- ════════════════════════════════ -->
+<g font-family="Caveat" font-weight="700" filter="url(#wobble)">
+  <!-- Green 1–5 -->
+  <circle cx="748" cy="392" r="14" fill="#eaf5e2" stroke="#2a5a1a" stroke-width="2"/>
+  <text x="748" y="398" text-anchor="middle" font-size="14" fill="#1a4a0a">1</text>
+
+  <circle cx="656" cy="415" r="14" fill="#eaf5e2" stroke="#2a5a1a" stroke-width="2"/>
+  <text x="656" y="421" text-anchor="middle" font-size="14" fill="#1a4a0a">2</text>
+
+  <circle cx="554" cy="395" r="14" fill="#eaf5e2" stroke="#2a5a1a" stroke-width="2"/>
+  <text x="554" y="401" text-anchor="middle" font-size="14" fill="#1a4a0a">3</text>
+
+  <circle cx="430" cy="348" r="14" fill="#eaf5e2" stroke="#2a5a1a" stroke-width="2"/>
+  <text x="430" y="354" text-anchor="middle" font-size="14" fill="#1a4a0a">4</text>
+
+  <circle cx="548" cy="407" r="14" fill="#eaf5e2" stroke="#2a5a1a" stroke-width="2"/>
+  <text x="548" y="413" text-anchor="middle" font-size="14" fill="#1a4a0a">5</text>
+
+  <!-- Red 6–14 -->
+  <circle cx="374" cy="382" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="374" y="388" text-anchor="middle" font-size="14" fill="#6a1208">6</text>
+
+  <circle cx="350" cy="360" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="350" y="366" text-anchor="middle" font-size="14" fill="#6a1208">7</text>
+
+  <circle cx="320" cy="380" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="320" y="386" text-anchor="middle" font-size="14" fill="#6a1208">8</text>
+
+  <circle cx="290" cy="432" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="290" y="438" text-anchor="middle" font-size="14" fill="#6a1208">9</text>
+
+  <circle cx="282" cy="475" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="282" y="481" text-anchor="middle" font-size="14" fill="#6a1208">10</text>
+
+  <circle cx="306" cy="516" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="306" y="522" text-anchor="middle" font-size="14" fill="#6a1208">11</text>
+
+  <circle cx="306" cy="558" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="306" y="564" text-anchor="middle" font-size="14" fill="#6a1208">12</text>
+
+  <circle cx="272" cy="600" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="272" y="606" text-anchor="middle" font-size="14" fill="#6a1208">13</text>
+
+  <circle cx="438" cy="606" r="14" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2"/>
+  <text x="438" y="612" text-anchor="middle" font-size="14" fill="#6a1208">14</text>
+
+  <!-- Blue A B C -->
+  <circle cx="558" cy="308" r="14" fill="#e4ecf5" stroke="#1a3a8a" stroke-width="2"/>
+  <text x="558" y="314" text-anchor="middle" font-size="14" fill="#1a3a8a">A</text>
+
+  <circle cx="322" cy="148" r="14" fill="#e4ecf5" stroke="#1a3a8a" stroke-width="2"/>
+  <text x="322" y="154" text-anchor="middle" font-size="14" fill="#1a3a8a">B</text>
+
+  <circle cx="466" cy="142" r="14" fill="#e4ecf5" stroke="#1a3a8a" stroke-width="2"/>
+  <text x="466" y="148" text-anchor="middle" font-size="14" fill="#1a3a8a">C</text>
+</g>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CITIES WITH LEADER LINES — carefully spaced, no overlap -->
+<!--                                                          -->
+<!-- Strategy:                                                -->
+<!-- • Each city has a dot at its actual position            -->
+<!-- • A thin leader line goes to a clear label zone         -->
+<!-- • Labels alternate left/right to avoid crowding         -->
+<!-- • Bigger cities get bigger labels                        -->
+<!-- ════════════════════════════════════════════════════════ -->
+
+<!-- Helper macro: dot at city, line to label -->
+<!-- Format: dot(cx,cy), line(cx cy → lx ly), label at (lx,ly) -->
+
+<!-- ── SHITTIM (east bank, far right) ── -->
+<circle cx="820" cy="392" r="7" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="820" y1="392" x2="948" y2="370" stroke="#2a1f0e" stroke-width="1" opacity="0.55" filter="url(#wobble2)"/>
+<text x="952" y="365" font-size="14" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">什亭 Shittim</text>
+<text x="952" y="380" font-size="11" fill="#6a5a3a" font-family="Caveat" filter="url(#wobble-text)">出發地（東岸）</text>
+
+<!-- ── GILGAL (west bank, base camp) ── -->
+<circle cx="660" cy="401" r="10" fill="none" stroke="#8a4018" stroke-width="2.5" filter="url(#wobble)"/>
+<circle cx="660" cy="401" r="5" fill="#8a4018" filter="url(#wobble)"/>
+<line x1="660" y1="401" x2="948" y2="412" stroke="#7a3810" stroke-width="1.2" opacity="0.6" filter="url(#wobble2)"/>
+<text x="952" y="408" font-size="16" fill="#6a2808" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">吉甲 Gilgal</text>
+<text x="952" y="424" font-size="11.5" fill="#8a4820" font-family="Caveat" filter="url(#wobble-text)">大本營（河西）</text>
+
+<!-- ── JERICHO ── -->
+<circle cx="648" cy="432" r="8" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="648" y1="432" x2="948" y2="452" stroke="#2a1f0e" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="952" y="449" font-size="15" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">耶利哥 Jericho</text>
+
+<!-- ── BETHEL ── -->
+<circle cx="415" cy="295" r="6.5" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="415" y1="295" x2="200" y2="248" stroke="#2a1f0e" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="100" y="238" font-size="14" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">伯特利</text>
+<text x="198" y="252" font-size="11" fill="#5a4a2a" font-family="Caveat" filter="url(#wobble-text)">Bethel</text>
+
+<!-- ── AI (questionable) ── -->
+<circle cx="458" cy="310" r="6" fill="#2a1f0e" stroke="#8a7050" stroke-width="1.5" stroke-dasharray="3,2" filter="url(#wobble)"/>
+<line x1="458" y1="310" x2="550" y2="272" stroke="#6a5a38" stroke-width="0.9" opacity="0.55" filter="url(#wobble2)"/>
+<text x="554" y="268" font-size="13.5" fill="#4a3a18" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">艾城 Ai ?</text>
+
+<!-- ── GIBEON ── -->
+<circle cx="385" cy="388" r="8" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="385" y1="388" x2="200" y2="352" stroke="#2a1f0e" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="198" y="342" font-size="15" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">基遍 Gibeon</text>
+<text x="198" y="358" font-size="10.5" fill="#5a4a2a" font-family="Caveat" filter="url(#wobble-text)" text-anchor="end">☀ 太陽停住 · al-Jib</text>
+
+<!-- ── JERUSALEM ── -->
+<circle cx="458" cy="465" r="10" fill="none" stroke="#4a3818" stroke-width="2.5" filter="url(#wobble)"/>
+<circle cx="458" cy="465" r="5" fill="#4a3818" filter="url(#wobble)"/>
+<line x1="458" y1="465" x2="948" y2="498" stroke="#3a2808" stroke-width="1.2" opacity="0.6" filter="url(#wobble2)"/>
+<text x="952" y="494" font-size="17" fill="#2a1808" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">耶路撒冷</text>
+<text x="952" y="511" font-size="11" fill="#7a4820" font-family="Caveat" filter="url(#wobble-text)">Jerusalem ⚠ 未逐耶布斯人（15:63）</text>
+
+<!-- ── SHILOH (tabernacle) ── -->
+<rect x="492" y="256" width="12" height="12" fill="#b89020" stroke="#7a6018" stroke-width="1.5" transform="rotate(10,498,262)" filter="url(#wobble)"/>
+<line x1="498" y1="262" x2="948" y2="280" stroke="#7a6018" stroke-width="1" opacity="0.55" filter="url(#wobble2)"/>
+<text x="952" y="277" font-size="14" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">示羅 Shiloh</text>
+<text x="952" y="292" font-size="11" fill="#7a6020" font-family="Caveat" filter="url(#wobble-text)">會幕所在（書18:1）</text>
+
+<!-- ── LOWER BETH HORON ── -->
+<circle cx="335" cy="345" r="6" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="335" y1="345" x2="200" y2="305" stroke="#2a1f0e" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="198" y="295" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">下伯和崙</text>
+<text x="198" y="310" font-size="10.5" fill="#5a4a2a" font-family="Caveat" filter="url(#wobble-text)" text-anchor="end">Lower Beth Horon</text>
+
+<!-- ── UPPER BETH HORON ── -->
+<circle cx="362" cy="380" r="6" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="362" y1="380" x2="200" y2="395" stroke="#2a1f0e" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="198" y="392" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">上伯和崙</text>
+<text x="198" y="406" font-size="10.5" fill="#5a4a2a" font-family="Caveat" filter="url(#wobble-text)" text-anchor="end">Upper Beth Horon</text>
+
+<!-- ── AIJALON ── -->
+<circle cx="305" cy="415" r="6" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="305" y1="415" x2="200" y2="432" stroke="#2a1f0e" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="198" y="430" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">亞雅崙 Aijalon</text>
+
+<!-- ── MAKKEDAH ── -->
+<circle cx="275" cy="452" r="6" fill="#2a1f0e" stroke="#7a6040" stroke-width="1.5" stroke-dasharray="3,2" filter="url(#wobble)"/>
+<line x1="275" y1="452" x2="108" y2="440" stroke="#5a4a28" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="105" y="432" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">瑪基大 ?</text>
+<text x="105" y="446" font-size="10.5" fill="#7a5a30" font-family="Caveat" filter="url(#wobble-text)" text-anchor="end">五王被殺（書10:16）</text>
+
+<!-- ── AZEKAH ── -->
+<circle cx="292" cy="498" r="7" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="292" y1="498" x2="105" y2="498" stroke="#2a1f0e" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="102" y="494" font-size="13.5" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">亞西加</text>
+<text x="102" y="508" font-size="10.5" fill="#5a4a2a" font-family="Caveat" filter="url(#wobble-text)" text-anchor="end">Azekah</text>
+
+<!-- ── LIBNAH ── -->
+<circle cx="322" cy="535" r="6" fill="#2a1f0e" stroke="#7a6040" stroke-width="1.5" stroke-dasharray="3,2" filter="url(#wobble)"/>
+<line x1="322" y1="535" x2="948" y2="545" stroke="#5a4a28" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="952" y="542" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">立拿 Libnah ?</text>
+
+<!-- ── LACHISH ── -->
+<circle cx="295" cy="578" r="8" fill="#2a1f0e" filter="url(#wobble)"/>
+<line x1="295" y1="578" x2="200" y2="590" stroke="#2a1f0e" stroke-width="1" opacity="0.55" filter="url(#wobble2)"/>
+<text x="198" y="588" font-size="14.5" fill="#2a1f0e" font-family="Caveat" font-weight="700" filter="url(#wobble-text)" text-anchor="end">拉吉 Lachish</text>
+
+<!-- ── EGLON ── -->
+<circle cx="258" cy="622" r="6" fill="#2a1f0e" stroke="#7a6040" stroke-width="1.5" stroke-dasharray="3,2" filter="url(#wobble)"/>
+<line x1="258" y1="622" x2="200" y2="638" stroke="#5a4a28" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="198" y="636" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">伊磯倫 Eglon ?</text>
+
+<!-- ── HEBRON ── -->
+<path d="M 455 575 L 459 564 L 463 575 L 452 569 L 464 569 Z" fill="#b08818" stroke="#8a6812" stroke-width="0.8" filter="url(#wobble)"/>
+<circle cx="455" cy="575" r="9" fill="none" stroke="#8a6818" stroke-width="2.5" filter="url(#wobble)"/>
+<line x1="455" y1="575" x2="948" y2="572" stroke="#7a5818" stroke-width="1.2" opacity="0.6" filter="url(#wobble2)"/>
+<text x="952" y="568" font-size="17" fill="#2a1808" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">希伯崙 Hebron</text>
+<text x="952" y="584" font-size="11.5" fill="#8a5820" font-family="Caveat" filter="url(#wobble-text)">★ 迦勒所求之地（書14:13）</text>
+
+<!-- ── DEBIR ── -->
+<circle cx="415" cy="635" r="6" fill="#2a1f0e" stroke="#7a6040" stroke-width="1.5" stroke-dasharray="3,2" filter="url(#wobble)"/>
+<line x1="415" y1="635" x2="948" y2="620" stroke="#5a4a28" stroke-width="1" opacity="0.5" filter="url(#wobble2)"/>
+<text x="952" y="616" font-size="13.5" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">底璧 Debir ?</text>
+<text x="952" y="630" font-size="11" fill="#7a5a30" font-family="Caveat" filter="url(#wobble-text)">押撒求上下泉水（書15:19）</text>
+
+<!-- ── WATERS OF MEROM ── -->
+<circle cx="415" cy="175" r="9" fill="#1a3a8a" stroke="#d0d8f0" stroke-width="2" filter="url(#wobble)"/>
+<line x1="415" y1="175" x2="948" y2="188" stroke="#1a3a7a" stroke-width="1.2" opacity="0.6" filter="url(#wobble2)"/>
+<text x="952" y="184" font-size="15" fill="#1a3a6a" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">米倫水 北方決戰地</text>
+<text x="952" y="199" font-size="11" fill="#3a5a9a" font-family="Caveat" filter="url(#wobble-text)">Waters of Merom（書11:7）</text>
+
+<!-- ── HAZOR ── -->
+<circle cx="452" cy="142" r="9" fill="#1a3a8a" stroke="#d0d8f0" stroke-width="2" filter="url(#wobble)"/>
+<line x1="452" y1="142" x2="948" y2="148" stroke="#1a3a7a" stroke-width="1.2" opacity="0.6" filter="url(#wobble2)"/>
+<text x="952" y="144" font-size="15" fill="#1a3a6a" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">夏瑣 Hazor</text>
+<text x="952" y="160" font-size="11" fill="#3a5a9a" font-family="Caveat" filter="url(#wobble-text)">北方聯盟主城・被焚</text>
+
+<!-- ── MISREPHOTH MAIM ── -->
+<circle cx="228" cy="130" r="7" fill="#1a3a8a" stroke="#d0d8f0" stroke-width="1.8" filter="url(#wobble)"/>
+<line x1="228" y1="130" x2="200" y2="115" stroke="#1a3a7a" stroke-width="1" opacity="0.55" filter="url(#wobble2)"/>
+<text x="198" y="105" font-size="12.5" fill="#1a3a6a" font-family="Caveat" font-weight="600" filter="url(#wobble-text)" text-anchor="end">米施利弗瑪</text>
+<text x="198" y="119" font-size="10.5" fill="#3a5a9a" font-family="Caveat" filter="url(#wobble-text)" text-anchor="end">（西追至此）</text>
+
+<!-- ── MIZPEH VALLEY ── -->
+<circle cx="515" cy="138" r="7" fill="#1a3a8a" stroke="#d0d8f0" stroke-width="1.8" filter="url(#wobble)"/>
+<line x1="515" y1="138" x2="548" y2="115" stroke="#1a3a7a" stroke-width="1" opacity="0.55" filter="url(#wobble2)"/>
+<text x="550" y="110" font-size="12.5" fill="#1a3a6a" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">米斯巴谷</text>
+<text x="550" y="124" font-size="10.5" fill="#3a5a9a" font-family="Caveat" filter="url(#wobble-text)">（東追至此）</text>
+
+<!-- ════════════════════════════════════ -->
+<!-- TRIBE LABELS  (clearly spaced)       -->
+<!-- ════════════════════════════════════ -->
+<g font-family="Caveat" font-weight="600" filter="url(#wobble-text)">
+  <!-- North -->
+  <text x="255" y="68" text-anchor="middle" font-size="15" fill="#3a5a28">亞設</text>
+  <text x="468" y="55" text-anchor="middle" font-size="15" fill="#3a5a28">拿弗他利</text>
+  <text x="435" y="168" text-anchor="middle" font-size="14.5" fill="#3a5a28">西布倫</text>
+  <text x="448" y="240" text-anchor="middle" font-size="14" fill="#3a5a28">以薩迦</text>
+  <text x="432" y="226" text-anchor="middle" font-size="11" fill="#5a7a45" font-weight="400">耶斯列平原</text>
+  <!-- Central west -->
+  <text x="415" y="302" text-anchor="middle" font-size="14" fill="#3a5a28">瑪拿西（西）</text>
+  <text x="418" y="370" text-anchor="middle" font-size="14.5" fill="#3a5a28">以法蓮</text>
+  <text x="210" y="362" text-anchor="middle" font-size="13.5" fill="#3a5a28">但</text>
+  <text x="210" y="376" text-anchor="middle" font-size="10.5" fill="#5a7a45" font-weight="400">（後遷北）</text>
+  <text x="428" y="442" text-anchor="middle" font-size="14" fill="#3a5a28">便雅憫</text>
+  <!-- Judah (large) -->
+  <text x="378" y="668" text-anchor="middle" font-size="26" fill="#3a5a28" font-weight="700">猶大</text>
+  <text x="378" y="692" text-anchor="middle" font-size="12" fill="#4a6a38" font-weight="400">書15章</text>
+  <!-- Simeon -->
+  <text x="338" y="795" text-anchor="middle" font-size="14" fill="#3a5a28">西緬</text>
+  <text x="338" y="810" text-anchor="middle" font-size="10" fill="#5a7a45" font-weight="400">猶大境內</text>
+  <!-- Philistine — label handled via leader line above -->
+  <!-- East tribes -->
+  <text x="778" y="225" text-anchor="middle" font-size="16" fill="#5a4020">瑪拿西（東）</text>
+  <text x="778" y="244" text-anchor="middle" font-size="11" fill="#7a5a30" font-weight="400">巴珊・摩西已分</text>
+  <text x="778" y="410" text-anchor="middle" font-size="17" fill="#5a4020">迦得</text>
+  <text x="778" y="429" text-anchor="middle" font-size="11" fill="#7a5a30" font-weight="400">基列・摩西已分</text>
+  <text x="778" y="558" text-anchor="middle" font-size="17" fill="#5a4020">流便</text>
+  <text x="778" y="577" text-anchor="middle" font-size="11" fill="#7a5a30" font-weight="400">摩押高原・摩西已分</text>
+</g>
+
+<!-- Modern city reference (very faint, small) -->
+<g font-family="Caveat" font-size="11" fill="#b09a72" opacity="0.6" filter="url(#wobble-text)">
+  <text x="245" y="342">特拉維夫</text>
+  <text x="200" y="598">加沙</text>
+  <text x="508" y="182">納布盧斯</text>
+  <text x="500" y="528">伯利恆</text>
+</g>
+
+<!-- ════════════════════════════════ -->
+<!-- ANNOTATION NOTES (handwritten)   -->
+<!-- ════════════════════════════════ -->
+<g font-family="Caveat" font-size="11" fill="#7a5a28" font-style="italic" filter="url(#wobble-text)" opacity="0.82">
+  <!-- Caleb note near Hebron -->
+  <line x1="455" y1="583" x2="550" y2="645" stroke="#9a7038" stroke-width="0.9" opacity="0.55"/>
+  <text x="552" y="643">85歲仍壯！（書14:11）</text>
+
+  <!-- Levi note -->
+  <text x="700" y="810">✏ 利未支派不分地業</text>
+  <text x="700" y="824">「耶和華是他們的產業」</text>
+  <text x="700" y="838">　（書13:33）</text>
+
+  <!-- Ch12 summary -->
+  <text x="700" y="878">📜 書12：共擊敗31王（河西）</text>
+  <text x="700" y="892">　 + 2王（河東，摩西時代）</text>
+</g>
+
+<!-- ════════════════════════════════ -->
+<!-- LEGEND BOX                       -->
+<!-- ════════════════════════════════ -->
+<path d="M 18 18 L 255 16 L 260 202 L 16 204 Z"
+  fill="#f5ead5" stroke="#5a3a10" stroke-width="2.5" filter="url(#box-shadow)" opacity="0.97"/>
+<path d="M 18 18 L 255 16 L 260 202 L 16 204 Z"
+  fill="none" stroke="#9a7830" stroke-width="1" filter="url(#wobble)" opacity="0.55"/>
+
+<text x="138" y="38" text-anchor="middle" font-size="16" fill="#2a1808" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">圖　例</text>
+
+<!-- Green central -->
+<line x1="28" y1="58" x2="68" y2="58" stroke="#2a5a1a" stroke-width="4" filter="url(#wobble2)"/>
+<circle cx="68" cy="58" r="12" fill="#eaf5e2" stroke="#2a5a1a" stroke-width="2" filter="url(#wobble)"/>
+<text x="68" y="63" text-anchor="middle" font-size="13" fill="#1a4a0a" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">1</text>
+<text x="86" y="54" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">中路戰役（書6–9）</text>
+<text x="86" y="68" font-size="11" fill="#5a4a2a" font-family="Caveat" filter="url(#wobble-text)">渡河→耶利哥→艾城→基遍</text>
+
+<!-- Red south -->
+<line x1="28" y1="92" x2="68" y2="92" stroke="#7a1a08" stroke-width="4" filter="url(#wobble2)"/>
+<circle cx="68" cy="92" r="12" fill="#f5e8e4" stroke="#7a1a08" stroke-width="2" filter="url(#wobble)"/>
+<text x="68" y="97" text-anchor="middle" font-size="13" fill="#6a1208" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">6</text>
+<text x="86" y="88" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">南路戰役（書10）</text>
+<text x="86" y="102" font-size="11" fill="#5a4a2a" font-family="Caveat" filter="url(#wobble-text)">基遍→伯和崙→拉吉→希伯崙</text>
+
+<!-- Blue north -->
+<line x1="28" y1="126" x2="68" y2="126" stroke="#1a3a8a" stroke-width="4" filter="url(#wobble2)"/>
+<circle cx="68" cy="126" r="12" fill="#e4ecf5" stroke="#1a3a8a" stroke-width="2" filter="url(#wobble)"/>
+<text x="68" y="131" text-anchor="middle" font-size="13" fill="#1a3a8a" font-family="Caveat" font-weight="700" filter="url(#wobble-text)">A</text>
+<text x="86" y="122" font-size="13" fill="#2a1f0e" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">北方戰役（書11）</text>
+<text x="86" y="136" font-size="11" fill="#5a4a2a" font-family="Caveat" filter="url(#wobble-text)">夏瑣聯盟→米倫決戰</text>
+
+<!-- Symbols -->
+<text x="28" y="158" font-size="12" fill="#4a3818" font-family="Caveat" filter="url(#wobble-text)">◎ 大本營  ⊙ 重要城市  □ 會幕</text>
+<text x="28" y="172" font-size="12" fill="#4a3818" font-family="Caveat" filter="url(#wobble-text)">? 位置存疑  ☆ 迦勒所求之地</text>
+<!-- Philistine swatch in legend -->
+<rect x="28" y="180" width="18" height="12" fill="#d4922a" opacity="0.55" rx="1"/>
+<rect x="28" y="180" width="18" height="12" fill="url(#h-cross)" opacity="0.85" rx="1"/>
+<rect x="28" y="180" width="18" height="12" fill="none" stroke="#8a3810" stroke-width="1.5" stroke-dasharray="3,2" rx="1"/>
+<text x="50" y="191" font-size="12" fill="#7a2808" font-family="Caveat" font-weight="600" filter="url(#wobble-text)">⚠ 未得之地（非利士）</text>
+
+<!-- ════════════════════════════════ -->
+<!-- TITLE BOX                        -->
+<!-- ════════════════════════════════ -->
+<path d="M 268 18 L 692 16 L 694 68 L 266 70 Z"
+  fill="#f5ead5" stroke="#5a3a10" stroke-width="2.5" filter="url(#box-shadow)" opacity="0.97"/>
+<path d="M 268 18 L 692 16 L 694 68 L 266 70 Z"
+  fill="none" stroke="#9a7830" stroke-width="1" filter="url(#wobble)" opacity="0.55"/>
+<text x="482" y="40" text-anchor="middle" font-size="24" fill="#1a0e04" font-family="Caveat" font-weight="700" filter="url(#wobble-text)" letter-spacing="2">約書亞記 征服與分地</text>
+<text x="482" y="60" text-anchor="middle" font-size="13.5" fill="#6a4a1a" font-family="Caveat" filter="url(#wobble-text)" letter-spacing="1">書 1–15 章  ·  征服路線 × 支派分地  ·  現代地名對照</text>
+
+<!-- ════════════════════════════════ -->
+<!-- COMPASS                          -->
+<!-- ════════════════════════════════ -->
+<g transform="translate(1058,52)" filter="url(#wobble)">
+  <circle cx="0" cy="0" r="28" fill="#f4eed8" stroke="#3a2e18" stroke-width="2"/>
+  <path d="M0 -21 L4.5 -6 L0 -11 L-4.5 -6 Z" fill="#8a1a08"/>
+  <path d="M0 21 L4.5 6 L0 11 L-4.5 6 Z" fill="#3a2e18"/>
+  <path d="M-21 0 L-6 4.5 L-11 0 L-6 -4.5 Z" fill="#3a2e18"/>
+  <path d="M21 0 L6 4.5 L11 0 L6 -4.5 Z" fill="#3a2e18"/>
+  <text x="0" y="-10" text-anchor="middle" font-size="13" fill="#2a1808" font-family="Caveat" font-weight="700">北</text>
+  <text x="0" y="20" text-anchor="middle" font-size="13" fill="#2a1808" font-family="Caveat">南</text>
+  <text x="-17" y="5" text-anchor="middle" font-size="13" fill="#2a1808" font-family="Caveat">西</text>
+  <text x="17" y="5" text-anchor="middle" font-size="13" fill="#2a1808" font-family="Caveat">東</text>
+</g>
+
+<!-- ════════════════════════════════ -->
+<!-- SCALE                            -->
+<!-- ════════════════════════════════ -->
+<path d="M 22 1010 L 152 1010" stroke="#3a2e18" stroke-width="2.2" filter="url(#wobble2)"/>
+<path d="M 22 1005 L 22 1015" stroke="#3a2e18" stroke-width="2.2" filter="url(#wobble2)"/>
+<path d="M 87 1007 L 87 1013" stroke="#3a2e18" stroke-width="1.8" filter="url(#wobble2)"/>
+<path d="M 152 1005 L 152 1015" stroke="#3a2e18" stroke-width="2.2" filter="url(#wobble2)"/>
+<text x="22" y="1030" text-anchor="middle" font-size="12" fill="#3a2e18" font-family="Caveat">0</text>
+<text x="87" y="1030" text-anchor="middle" font-size="12" fill="#3a2e18" font-family="Caveat">25</text>
+<text x="152" y="1030" text-anchor="middle" font-size="12" fill="#3a2e18" font-family="Caveat">50km</text>
+
+</svg>
 </div>
 
-<!-- FULLSCREEN WRAPPER (contains toolbar + lesson + map) -->
-<div id="fs-container">
+<div class="note">SVG 鉛筆素描風格 · 手繪字體 Caveat · 地名標籤皆以引線連結城市點 · 邊界為示意性質</div>
 
-<!-- TOOLBAR -->
-<div class="toolbar">
-
-  <!-- Layer controls -->
-  <div class="toolbar-section">
-    <div class="toolbar-label">地圖圖層</div>
-    <div class="btn-group">
-      <button class="btn-green active" id="btn-conquest" onclick="toggleLayer('conquest')">🗡 征服路線</button>
-      <button class="btn-blue" id="btn-north" onclick="toggleLayer('north')">⬆ 北方戰役</button>
-      <button id="btn-tribes" onclick="toggleLayer('tribes')">🏕 支派分地</button>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Tribe opacity -->
-  <div class="toolbar-section">
-    <div class="toolbar-label">支派圖層透明度</div>
-    <div class="opacity-row">
-      <label>透明</label>
-      <input type="range" id="tribe-opacity" min="0" max="100" value="0" oninput="setTribesOpacity(this.value)">
-      <label>不透明</label>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Lesson mode -->
-  <div class="toolbar-section">
-    <div class="toolbar-label">分段教學模式</div>
-    <div class="btn-group">
-      <button class="btn-green" onclick="startLesson('central')">📖 中路戰役</button>
-      <button class="btn-red" onclick="startLesson('south')">📖 南路戰役</button>
-      <button class="btn-blue" onclick="startLesson('north')">📖 北方戰役</button>
-      <button onclick="startLesson('tribes')">📖 支派分地</button>
-      <button onclick="exitLesson()" style="border-color:rgba(180,60,60,0.4);color:#cc8888">✕ 結束</button>
-    </div>
-  </div>
-
-</div>
-
-<!-- LESSON PANEL -->
-<div class="lesson-bar" id="lesson-bar">
-  <div class="lesson-nav">
-    <button onclick="lessonStep(-1)" style="padding:7px 18px;font-size:1.1rem">◀</button>
-    <div class="lesson-title" id="lesson-title">教學模式</div>
-    <button onclick="lessonStep(1)" style="padding:7px 18px;font-size:1.1rem">▶</button>
-  </div>
-  <div class="lesson-text" id="lesson-text"></div>
-  <div class="lesson-dots" id="lesson-dots"></div>
-</div>
-
-<!-- MAP STACK -->
-<div class="map-wrap" id="map-wrap">
-  <button class="fs-btn" onclick="toggleFS()">⛶ 全螢幕</button>
-
-  <!-- BASE LAYER: Satellite-style terrain + modern cities -->
-  <div class="map-base" id="layer-base">
-  <svg viewBox="0 0 820 900" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="med" x1="1" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#4a8fbf"/><stop offset="100%" stop-color="#3a7aaa"/>
-    </linearGradient>
-    <linearGradient id="land-base" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#c5ab65"/><stop offset="50%" stop-color="#b89e55"/><stop offset="100%" stop-color="#c8aa68"/>
-    </linearGradient>
-    <linearGradient id="rift-g" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#90b060"/><stop offset="100%" stop-color="#78a050"/>
-    </linearGradient>
-    <linearGradient id="dsea" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#50aacf"/><stop offset="100%" stop-color="#3888aa"/>
-    </linearGradient>
-    <filter id="lbl">
-      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="rgba(0,0,0,1)" flood-opacity="1"/>
-    </filter>
-    <filter id="lblw">
-      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="rgba(255,255,255,0.85)" flood-opacity="1"/>
-    </filter>
-    <filter id="gd">
-      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(0,0,0,0.8)"/>
-    </filter>
-  </defs>
-
-  <!-- Ocean -->
-  <rect width="820" height="900" fill="url(#med)"/>
-
-  <!-- Main land -->
-  <path d="M 230 0 L 820 0 L 820 900 L 230 900
-    L 215 840 L 205 770 L 210 700 L 198 630
-    L 188 555 L 190 485 L 184 410 L 186 335
-    L 190 258 L 196 178 L 205 95 L 218 40 Z"
-    fill="#c0a862"/>
-  <!-- Land texture tint -->
-  <path d="M 230 0 L 820 0 L 820 900 L 230 900
-    L 215 840 L 205 770 L 210 700 L 198 630
-    L 188 555 L 190 485 L 184 410 L 186 335
-    L 190 258 L 196 178 L 205 95 L 218 40 Z"
-    fill="url(#land-base)" opacity="0.55"/>
-
-  <!-- Coastal plain (lighter) -->
-  <path d="M 218 40 L 380 0 L 820 0 L 820 260
-    L 450 180 L 395 255 L 370 355 L 355 440
-    L 345 520 L 340 600 L 335 680 L 328 760
-    L 320 840 L 310 900 L 230 900
-    L 215 840 L 205 770 L 210 700 L 198 630
-    L 188 555 L 190 485 L 184 410 L 186 335
-    L 190 258 L 196 178 L 205 95 Z"
-    fill="#d8c480" opacity="0.35"/>
-
-  <!-- Hill country ridge -->
-  <path d="M 390 80 L 510 60 L 590 110 L 610 210
-    L 595 320 L 575 420 L 562 520 L 550 620
-    L 538 720 L 460 800 L 405 820 L 380 770
-    L 372 680 L 368 580 L 370 480 L 375 380
-    L 378 280 L 382 180 Z"
-    fill="#a09050" opacity="0.45"/>
-
-  <!-- Jordan rift valley -->
-  <path d="M 665 0 L 820 0 L 820 900 L 665 900
-    L 655 820 L 648 720 L 652 620 L 655 520
-    L 652 420 L 648 320 L 652 220 L 658 120 Z"
-    fill="url(#rift-g)" opacity="0.5"/>
-
-  <!-- Dead Sea -->
-  <path d="M 690 545 Q 740 530 762 568 Q 782 610 775 668
-    Q 768 728 738 750 Q 705 762 682 740
-    Q 658 712 660 668 Q 662 610 690 545 Z"
-    fill="url(#dsea)" opacity="0.9"/>
-  <text x="724" y="652" text-anchor="middle" font-size="11.5" fill="#c0e8f8" font-family="Noto Serif TC" font-weight="bold" filter="url(#lbl)">死海</text>
-  <text x="724" y="666" text-anchor="middle" font-size="9.5" fill="#a0d0e8" font-family="Noto Serif TC" filter="url(#lbl)">Dead Sea</text>
-
-  <!-- Jordan River -->
-  <path d="M 660 88 Q 655 175 658 268 Q 660 362 658 455 Q 656 515 660 545"
-        stroke="#5abcdc" stroke-width="8" fill="none" opacity="0.6" stroke-linecap="round"/>
-  <path d="M 660 88 Q 655 175 658 268 Q 660 362 658 455 Q 656 515 660 545"
-        stroke="#8ad8f0" stroke-width="3" fill="none" opacity="0.88" stroke-linecap="round"/>
-  <text x="636" y="330" font-size="10" fill="#5ab0d0" font-family="Noto Serif TC" filter="url(#lbl)" transform="rotate(-88,636,330)">約但河  Jordan River</text>
-
-  <!-- Sea of Galilee -->
-  <ellipse cx="672" cy="72" rx="32" ry="22" fill="#52a8cc" opacity="0.82"/>
-  <text x="672" y="70" text-anchor="middle" font-size="8.5" fill="#d0f0ff" font-family="Noto Serif TC" filter="url(#lbl)">加利利海</text>
-
-  <!-- Mediterranean label -->
-  <text x="96" y="420" font-size="11.5" fill="#c0dff8" font-family="Noto Serif TC" text-anchor="middle" transform="rotate(-90,96,420)" letter-spacing="3" filter="url(#lbl)">地　中　海  Mediterranean Sea</text>
-
-  <!-- Roads (faint) -->
-  <path d="M 345 60 Q 362 240 375 420 Q 380 540 372 680 Q 365 780 355 880" stroke="#e8d060" stroke-width="2.2" fill="none" opacity="0.28" stroke-dasharray="5,4"/>
-  <text x="348" y="160" font-size="8" fill="#d0b840" font-family="sans-serif" opacity="0.55">6</text>
-  <rect x="341" y="148" width="14" height="14" rx="2" fill="#e8d060" opacity="0.2"/>
-
-  <path d="M 658 88 Q 655 240 652 420 Q 650 540 656 660" stroke="#e8d060" stroke-width="2" fill="none" opacity="0.22" stroke-dasharray="4,4"/>
-  <text x="665" y="240" font-size="8" fill="#d0b840" font-family="sans-serif" opacity="0.5">90</text>
-
-  <!-- Modern city dots (reference, grey) -->
-  <!-- Tel Aviv -->
-  <circle cx="240" cy="295" r="6" fill="#e0e0e0" stroke="#fff" stroke-width="1.2" opacity="0.72"/>
-  <text x="252" y="290" font-size="10" fill="#f0f0f0" font-family="Noto Serif TC" filter="url(#lbl)">特拉維夫</text>
-  <text x="252" y="302" font-size="8.5" fill="#d8d8d8" font-family="Noto Serif TC" filter="url(#lbl)">Tel Aviv-Yafo</text>
-
-  <!-- Netanya -->
-  <circle cx="248" cy="122" r="4" fill="#d0d0d0" stroke="#fff" stroke-width="0.8" opacity="0.65"/>
-  <text x="257" y="126" font-size="9" fill="#e2e2e2" font-family="Noto Serif TC" filter="url(#lbl)">內坦亞 Netanya</text>
-
-  <!-- Herzliya -->
-  <circle cx="240" cy="192" r="3.5" fill="#c8c8c8" opacity="0.6"/>
-  <text x="249" y="196" font-size="8.5" fill="#d8d8d8" font-family="Noto Serif TC" filter="url(#lbl)">海爾茲利亞 Herzliya</text>
-
-  <!-- Rishon LeZion -->
-  <circle cx="252" cy="360" r="4" fill="#d0d0d0" opacity="0.6"/>
-  <text x="260" y="364" font-size="8.5" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#lbl)">里雄萊錫安 Rishon LeZion</text>
-
-  <!-- Ashdod -->
-  <circle cx="228" cy="452" r="4" fill="#d0d0d0" opacity="0.62"/>
-  <text x="238" y="456" font-size="9" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#lbl)">阿什杜德 Ashdod</text>
-
-  <!-- Ashkelon -->
-  <circle cx="220" cy="528" r="4" fill="#d0d0d0" opacity="0.62"/>
-  <text x="229" y="532" font-size="9" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#lbl)">亞實基倫 Ashkelon</text>
-
-  <!-- Gaza -->
-  <circle cx="200" cy="618" r="5" fill="#d8c8a0" stroke="#fff" stroke-width="1" opacity="0.72"/>
-  <text x="210" y="622" font-size="10" fill="#ffe8c0" font-family="Noto Serif TC" filter="url(#lbl)">加沙 Gaza</text>
-
-  <!-- Kiryat Gat -->
-  <circle cx="298" cy="545" r="3.5" fill="#c8c8c8" opacity="0.55"/>
-  <text x="306" y="549" font-size="8" fill="#d8d8d8" font-family="Noto Serif TC" filter="url(#lbl)">迦特鎮 Kiryat Gat</text>
-
-  <!-- Sderot -->
-  <circle cx="232" cy="588" r="3" fill="#c8c8c8" opacity="0.5"/>
-  <text x="240" y="592" font-size="8" fill="#d8d8d8" font-family="Noto Serif TC" filter="url(#lbl)">斯德洛特 Sderot</text>
-
-  <!-- Ramallah -->
-  <circle cx="456" cy="358" r="4" fill="#d0d0d0" opacity="0.62"/>
-  <text x="464" y="362" font-size="9" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#lbl)">拉馬拉 Ramallah</text>
-
-  <!-- Nablus -->
-  <circle cx="520" cy="162" r="4.5" fill="#d8d8d8" stroke="#fff" stroke-width="1" opacity="0.68"/>
-  <text x="530" y="158" font-size="10" fill="#f0f0e0" font-family="Noto Serif TC" filter="url(#lbl)">納布盧斯</text>
-  <text x="530" y="170" font-size="8.5" fill="#e2e2d2" font-family="Noto Serif TC" filter="url(#lbl)">Nablus / Shecem</text>
-
-  <!-- Bethlehem -->
-  <circle cx="508" cy="525" r="4" fill="#d0d0d0" opacity="0.62"/>
-  <text x="516" y="529" font-size="9" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#lbl)">伯利恆 Bethlehem</text>
-
-  <!-- Holon -->
-  <circle cx="250" cy="332" r="3.2" fill="#c8c8c8" opacity="0.5"/>
-  <text x="258" y="336" font-size="8" fill="#d8d8d8" font-family="Noto Serif TC" filter="url(#lbl)">霍隆 Holon</text>
-
-  <!-- Arad -->
-  <circle cx="552" cy="740" r="3.5" fill="#c8c8c8" opacity="0.5"/>
-  <text x="560" y="744" font-size="8.5" fill="#d8d8d8" font-family="Noto Serif TC" filter="url(#lbl)">阿拉德 Arad</text>
-
-  <!-- Ofakim -->
-  <circle cx="255" cy="660" r="3" fill="#c8c8c8" opacity="0.5"/>
-  <text x="262" y="664" font-size="8" fill="#d8d8d8" font-family="Noto Serif TC" filter="url(#lbl)">奧法基姆 Ofakim</text>
-
-  <!-- Makabim-Reut (near Aijalon) -->
-  <circle cx="345" cy="335" r="3" fill="#c8c8c8" opacity="0.48"/>
-  <text x="352" y="332" font-size="7.5" fill="#d0d0d0" font-family="Noto Serif TC" filter="url(#lbl)">莫迪因馬加比姆</text>
-  <text x="352" y="342" font-size="7" fill="#c8c8c8" font-family="Noto Serif TC" filter="url(#lbl)">Makabim-Reut</text>
-
-  <!-- As-Salt Jordan -->
-  <circle cx="775" cy="342" r="3.5" fill="#c8c8c8" opacity="0.5"/>
-  <text x="782" y="346" font-size="8" fill="#d8d8d8" font-family="Noto Serif TC" filter="url(#lbl)">As-Salt</text>
-
-  <!-- Compass -->
-  <g transform="translate(776,68)">
-    <circle cx="0" cy="0" r="26" fill="rgba(0,0,0,0.7)" stroke="#d4a830" stroke-width="1.5"/>
-    <path d="M0 -19 L3.5 -6 L0 -11 L-3.5 -6 Z" fill="#ee3322"/>
-    <path d="M0 19 L3.5 6 L0 11 L-3.5 6 Z" fill="#d4a830"/>
-    <path d="M-19 0 L-6 3.5 L-11 0 L-6 -3.5 Z" fill="#d4a830"/>
-    <path d="M19 0 L6 3.5 L11 0 L6 -3.5 Z" fill="#d4a830"/>
-    <text x="0" y="-8" text-anchor="middle" font-size="11" fill="#fff" font-family="Noto Serif TC">北</text>
-    <text x="0" y="18" text-anchor="middle" font-size="11" fill="#fff" font-family="Noto Serif TC">南</text>
-    <text x="-15" y="4" text-anchor="middle" font-size="11" fill="#fff" font-family="Noto Serif TC">西</text>
-    <text x="15" y="4" text-anchor="middle" font-size="11" fill="#fff" font-family="Noto Serif TC">東</text>
-  </g>
-
-  <!-- Scale -->
-  <line x1="18" y1="868" x2="130" y2="868" stroke="#d4a830" stroke-width="1.8"/>
-  <line x1="18" y1="863" x2="18" y2="873" stroke="#d4a830" stroke-width="1.8"/>
-  <line x1="74" y1="865" x2="74" y2="871" stroke="#d4a830" stroke-width="1.2"/>
-  <line x1="130" y1="863" x2="130" y2="873" stroke="#d4a830" stroke-width="1.8"/>
-  <text x="18" y="883" text-anchor="middle" font-size="9" fill="#d4a830" font-family="Noto Serif TC">0</text>
-  <text x="74" y="883" text-anchor="middle" font-size="9" fill="#d4a830" font-family="Noto Serif TC">25</text>
-  <text x="130" y="883" text-anchor="middle" font-size="9" fill="#d4a830" font-family="Noto Serif TC">50km</text>
-
-  <!-- Title box -->
-  <rect x="248" y="14" width="320" height="48" rx="6" fill="rgba(0,0,0,0.82)" stroke="#d4a830" stroke-width="1.5"/>
-  <text x="408" y="30" text-anchor="middle" font-size="13.5" fill="#d4a830" font-family="Cinzel" letter-spacing="1">約書亞記 10–15 章</text>
-  <text x="408" y="53" text-anchor="middle" font-size="10" fill="#906020" font-family="Noto Serif TC">征服路線 × 支派分地 · 現代地名對照</text>
-
-  </svg>
-  </div><!-- end map-base -->
-
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- LAYER 2: TRIBAL ALLOCATION (transparent overlay)   -->
-  <!-- Coordinate reference (matches base map):           -->
-  <!--   Jordan River  x≈658, runs y=88→545              -->
-  <!--   Sea of Galilee cx=672,cy=72                      -->
-  <!--   Dead Sea      cx=724,cy=652 (large ellipse)      -->
-  <!--   Gilgal        668,342  (west bank, near Jericho) -->
-  <!--   Jericho       656,375                            -->
-  <!--   Jerusalem     492,462                            -->
-  <!--   Hebron        484,598                            -->
-  <!--   Shiloh        528,252                            -->
-  <!-- West tribes:  x = 188 → 658                       -->
-  <!-- East tribes:  x = 668 → 820                       -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <div class="map-layer" id="layer-tribes">
-  <svg viewBox="0 0 820 900" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <pattern id="th" x="0" y="0" width="7" height="7" patternUnits="userSpaceOnUse">
-      <rect width="7" height="7" fill="#c0aa80" opacity="0.7"/>
-      <path d="M0 7 L7 0" stroke="#a08060" stroke-width="0.9"/>
-    </pattern>
-    <filter id="tlbl">
-      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="rgba(0,0,0,0.95)" flood-opacity="1"/>
-    </filter>
-  </defs>
-
-  <!-- ══════════════════════════════════════════ -->
-  <!-- TRANSJORDAN (EAST) TRIBES — x: 668 → 820 -->
-  <!-- ══════════════════════════════════════════ -->
-  <!--
-    書13:29-31 瑪拿西東：基列北部＋巴珊全地
-      北界：黑門山（地圖北邊 y=0）
-      南界：約 y=328（雅木克河附近）
-      東界：x=820（地圖右邊）
-      西界：約但河 x=658，但加利利海東側
-  -->
-  <path id="t-emanasseh"
-    d="M 672 88 L 820 88 L 820 328 L 668 328 L 665 260 L 668 180 Z"
-    fill="#d4a870" opacity="0.75"/>
-
-  <!--
-    書13:24-28 迦得：基列南半部＋耶利哥對面平原
-      北界：約 y=328（雅木克河）
-      南界：約 y=480（亞嫩河以北）
-      包含基列拉末、瑪哈念、疏割等
-  -->
-  <path id="t-gad"
-    d="M 668 328 L 820 328 L 820 488 L 668 488 L 660 455 L 660 370 L 665 340 Z"
-    fill="#c08858" opacity="0.75"/>
-
-  <!--
-    書13:15-23 流便：亞嫩河（南界）到希實本
-      北界：約 y=488（亞嫩河北岸）
-      南界：約 y=648（亞嫩河 = 今天的Arnon/Wadi Mujib）
-      包含底本、基列、米底巴等摩押高原城市
-  -->
-  <path id="t-reuben"
-    d="M 668 488 L 820 488 L 820 660 L 668 660 L 660 590 L 660 508 Z"
-    fill="#c89060" opacity="0.75"/>
-
-  <!-- River border line (Jordan) -->
-  <line x1="660" y1="88" x2="660" y2="660" stroke="#3a5818" stroke-width="2" stroke-dasharray="8,5" opacity="0.5"/>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- WEST JORDAN TRIBES — x: 188 → 658         -->
-  <!-- ═══════════════════════════════════════════ -->
-
-  <!--
-    書19:24-31 亞設：地中海北部沿岸，迦密山以北
-      西：地中海 x=188
-      北：地圖頂 y=0
-      東：約到黎巴嫩山麓 x≈320
-      南：迦密山 約y=185
-  -->
-  <path id="t-asher"
-    d="M 188 0 L 322 0 L 318 88 L 300 148 L 272 180 L 248 195 L 220 175 L 200 135 L 190 68 Z"
-    fill="#a0cc88" opacity="0.75"/>
-
-  <!--
-    書19:32-39 拿弗他利：加利利海西北、上加利利
-      西：約到x=320
-      北：y=0
-      東：加利利海西側 x≈645
-      南：約y=195（與西布倫相接）
-  -->
-  <path id="t-naphtali"
-    d="M 322 0 L 645 0 L 645 88 L 638 130 L 610 158 L 575 172 L 545 165 L 498 150 L 448 138 L 395 112 L 355 92 L 318 88 Z"
-    fill="#88c070" opacity="0.75"/>
-
-  <!--
-    書19:10-16 西布倫：加利利南山地，拿撒勒一帶
-      北：與拿弗他利相接 y≈138-172
-      南：與以薩迦相接 y≈230
-      西：x≈300
-      東：x≈560
-  -->
-  <path id="t-zebulun"
-    d="M 300 148 L 318 88 L 355 92 L 395 112 L 448 138 L 498 150 L 545 165 L 575 172 L 590 205 L 572 222 L 530 232 L 482 228 L 435 222 L 388 218 L 348 210 L 318 202 Z"
-    fill="#b0d890" opacity="0.75"/>
-
-  <!--
-    書19:17-23 以薩迦：耶斯列平原（最肥沃）
-      北：與西布倫相接
-      南：與瑪拿西西相接 y≈282
-      西：x≈300
-      東：x≈610（約但河谷西側）
-  -->
-  <path id="t-issachar"
-    d="M 318 202 L 348 210 L 388 218 L 435 222 L 482 228 L 530 232 L 572 222 L 590 205 L 608 248 L 598 268 L 555 278 L 505 282 L 452 278 L 398 274 L 350 268 L 318 260 Z"
-    fill="#c8e898" opacity="0.75"/>
-
-  <!--
-    書17:1-18 瑪拿西西：以法蓮北方，包括多珥、米吉多
-      北：與以薩迦相接
-      南：與以法蓮相接 y≈362
-      西：地中海沿岸 x=188（含多珥）
-      東：約但河 x≈655
-  -->
-  <path id="t-wmanasseh"
-    d="M 188 185 L 220 175 L 248 195 L 272 180 L 300 148 L 318 202 L 318 260 L 350 268 L 398 274 L 452 278 L 505 282 L 555 278 L 598 268 L 610 310 L 598 328 L 548 335 L 492 338 L 438 335 L 385 330 L 332 325 L 295 318 L 260 305 L 228 285 L 205 248 Z"
-    fill="#98cc80" opacity="0.75"/>
-
-  <!--
-    書16:1-10 以法蓮：中部山地，示劍以南
-      北：與瑪拿西西相接
-      南：與便雅憫相接 y≈432
-      西：x=188（但部分受限）
-      東：約但河 x≈655
-  -->
-  <path id="t-ephraim"
-    d="M 295 318 L 332 325 L 385 330 L 438 335 L 492 338 L 548 335 L 598 328 L 612 368 L 598 382 L 548 388 L 492 390 L 438 388 L 385 385 L 335 380 L 298 372 L 272 355 Z"
-    fill="#80c068" opacity="0.75"/>
-
-  <!--
-    書19:40-48 但：原分於雅法到以革倫沿海地區
-      （後來被驅逐，但原始分配在此）
-      西：地中海 x=188
-      東：x≈295
-      北：y≈318
-      南：y≈430
-  -->
-  <path id="t-dan"
-    d="M 188 318 L 295 318 L 272 355 L 298 372 L 285 400 L 262 415 L 230 412 L 188 395 Z"
-    fill="#b8e0a0" opacity="0.75"/>
-
-  <!--
-    書18:11-28 便雅憫：猶大與以法蓮之間
-      包含耶利哥、伯特利、基遍、耶路撒冷北境
-      北：與以法蓮相接 y≈380-390
-      南：與猶大相接 y≈468
-      西：x≈285
-      東：約但河 x≈655（包含耶利哥）
-  -->
-  <path id="t-benjamin"
-    d="M 298 372 L 335 380 L 385 385 L 438 388 L 492 390 L 548 388 L 598 382 L 612 435 L 598 448 L 548 452 L 492 455 L 438 455 L 385 452 L 335 448 L 298 442 L 282 415 Z"
-    fill="#e0d888" opacity="0.75"/>
-
-  <!--
-    書15:1-63 猶大：南方廣大地業
-      北：與便雅憫相接
-      南：加低斯巴尼亞（地圖底部）
-      西：非利士平原（x≈188-285 為非利士地，未得）
-      東：死海西岸，鹽海
-      包含希伯崙、拉吉、別是巴等
-  -->
-  <path id="t-judah"
-    d="M 298 442 L 335 448 L 385 452 L 438 455 L 492 455 L 548 452 L 598 448 L 612 520 L 600 610 L 575 700 L 538 775 L 490 808 L 435 820 L 378 808 L 320 782 L 275 730 L 248 665 L 235 588 L 230 505 Z"
-    fill="#88b870" opacity="0.75"/>
-
-  <!--
-    書19:1-9 西緬：在猶大境內（南部），包含別是巴
-  -->
-  <path id="t-simeon"
-    d="M 255 692 L 388 698 L 390 775 L 360 782 L 320 782 L 275 730 L 255 712 Z"
-    fill="#a8d088" opacity="0.75"/>
-
-  <!--
-    非利士地（未得之地）：迦薩、亞實突等五城
-    書13:2-3
-  -->
-  <path id="t-philistine"
-    d="M 188 395 L 230 412 L 262 415 L 298 442 L 230 505 L 188 480 Z"
-    fill="url(#th)" opacity="0.85"/>
-
-  <!-- ══════════════════════════════════ -->
-  <!-- TRIBE LABELS                       -->
-  <!-- ══════════════════════════════════ -->
-
-  <!-- East tribes (河東) -->
-  <text x="744" y="198" text-anchor="middle" font-size="14" font-weight="bold" fill="#5a2808" font-family="Noto Serif TC" filter="url(#tlbl)">瑪拿西（東）</text>
-  <text x="744" y="214" text-anchor="middle" font-size="9" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">巴珊・書13:29-31</text>
-  <text x="744" y="226" text-anchor="middle" font-size="8.5" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">摩西已分</text>
-
-  <text x="744" y="402" text-anchor="middle" font-size="14" font-weight="bold" fill="#5a2808" font-family="Noto Serif TC" filter="url(#tlbl)">迦得</text>
-  <text x="744" y="418" text-anchor="middle" font-size="9" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">基列南部・書13:24-28</text>
-  <text x="744" y="430" text-anchor="middle" font-size="8.5" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">摩西已分</text>
-
-  <text x="744" y="568" text-anchor="middle" font-size="14" font-weight="bold" fill="#5a2808" font-family="Noto Serif TC" filter="url(#tlbl)">流便</text>
-  <text x="744" y="584" text-anchor="middle" font-size="9" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">摩押高原・書13:15-23</text>
-  <text x="744" y="596" text-anchor="middle" font-size="8.5" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">摩西已分</text>
-
-  <!-- North/Galilee labels -->
-  <text x="252" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">亞設</text>
-  <text x="252" y="68" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書19:24-31</text>
-
-  <text x="482" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">拿弗他利</text>
-  <text x="482" y="68" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書19:32-39</text>
-
-  <text x="448" y="162" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">西布倫</text>
-  <text x="448" y="175" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書19:10-16</text>
-
-  <text x="460" y="248" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">以薩迦</text>
-  <text x="460" y="261" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">耶斯列平原・書19:17-23</text>
-
-  <!-- Central/West labels -->
-  <text x="395" y="298" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">瑪拿西（西）</text>
-  <text x="395" y="311" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書17:1-18</text>
-
-  <text x="415" y="362" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">以法蓮</text>
-  <text x="415" y="375" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書16:1-10</text>
-
-  <text x="215" y="362" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">但</text>
-  <text x="215" y="374" text-anchor="middle" font-size="7.5" fill="#4a6030" font-family="Noto Serif TC" filter="url(#tlbl)">未能佔地</text>
-  <text x="215" y="384" text-anchor="middle" font-size="7" fill="#4a6030" font-family="Noto Serif TC" filter="url(#tlbl)">書19:40-48</text>
-
-  <text x="435" y="420" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">便雅憫</text>
-  <text x="435" y="433" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書18:11-28</text>
-
-  <text x="215" y="440" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#5a3010" font-family="Noto Serif TC" filter="url(#tlbl)">非利士地</text>
-  <text x="215" y="452" text-anchor="middle" font-size="8" fill="#7a4820" font-family="Noto Serif TC" filter="url(#tlbl)">未得之地・書13:2-3</text>
-
-  <text x="378" y="595" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">猶大</text>
-  <text x="378" y="613" text-anchor="middle" font-size="9" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書15章・希伯崙・底璧</text>
-
-  <text x="315" y="745" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">西緬</text>
-  <text x="315" y="758" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">猶大境內・書19:1-9</text>
-
-  <!-- Key biblical cities on tribe layer -->
-  <!-- Hebron -->
-  <circle cx="484" cy="598" r="6" fill="#e8b020" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
-  <text x="494" y="594" font-size="10" fill="#ffe060" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">希伯崙</text>
-
-  <!-- Beersheba (southern anchor) -->
-  <circle cx="390" cy="748" r="5" fill="#e0d0a0" stroke="#fff" stroke-width="1.2" opacity="0.85"/>
-  <text x="400" y="744" font-size="9.5" fill="#f0e0b0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">別是巴</text>
-
-  <!-- Shechem / Nablus -->
-  <circle cx="520" cy="162" r="5" fill="#e0e0e0" stroke="#fff" stroke-width="1" opacity="0.8"/>
-  <text x="530" y="158" font-size="9" fill="#f0f0e0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">示劍</text>
-
-  <!-- Ramoth Gilead (east) -->
-  <circle cx="748" cy="302" r="5" fill="#e0c890" stroke="#fff" stroke-width="1.2" opacity="0.85"/>
-  <text x="756" y="298" font-size="9" fill="#ffe0a0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">基列拉末</text>
-
-  <!-- Dibon (Reuben/Moab, south east) -->
-  <circle cx="748" cy="548" r="4.5" fill="#e0c890" stroke="#fff" stroke-width="1" opacity="0.8"/>
-  <text x="756" y="545" font-size="9" fill="#ffe0a0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">底本</text>
-
-  <!-- Mahanaim (Gad) -->
-  <circle cx="718" cy="402" r="4.5" fill="#e0c890" stroke="#fff" stroke-width="1" opacity="0.8"/>
-  <text x="726" y="398" font-size="9" fill="#ffe0a0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">瑪哈念</text>
-
-  <!-- Outer border (land mass) -->
-  <path d="M 188 0 L 645 0 L 645 88 L 658 88 L 820 88 L 820 660
-    L 668 660 L 600 610 L 575 700 L 538 775 L 490 808
-    L 435 820 L 378 808 L 320 782 L 275 730 L 248 665
-    L 235 588 L 230 505 L 188 480 L 188 0 Z"
-    fill="none" stroke="#5a4010" stroke-width="1.5" opacity="0.45"/>
-
-  <!-- Jordan River line -->
-  <line x1="658" y1="88" x2="658" y2="660" stroke="#3a5818" stroke-width="2" stroke-dasharray="8,5" opacity="0.5"/>
-  <!-- Label: 約但河 west side -->
-  <text x="640" y="420" font-size="8.5" fill="#3a7050" font-family="Noto Serif TC" filter="url(#tlbl)" transform="rotate(-90,640,420)" opacity="0.8">約　但　河</text>
-
-  </svg>
-  </div><!-- end layer-tribes -->
-
-  <!-- ═════════════════════════════════════════════════════ -->
-  <!-- LAYER 3: CONQUEST ROUTES (central + south)            -->
-  <!-- ═════════════════════════════════════════════════════ -->
-  <div class="map-layer" id="layer-conquest">
-  <svg viewBox="0 0 820 900" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <polygon points="0 0, 10 5, 0 10" fill="#22cc44"/>
-    </marker>
-    <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <polygon points="0 0, 10 5, 0 10" fill="#ee3322"/>
-    </marker>
-    <marker id="ag2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-      <polygon points="0 0, 7 3.5, 0 7" fill="#22cc44"/>
-    </marker>
-    <marker id="ar2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-      <polygon points="0 0, 7 3.5, 0 7" fill="#ee3322"/>
-    </marker>
-    <filter id="gg"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(30,220,60,0.7)"/></filter>
-    <filter id="gr"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(220,30,30,0.7)"/></filter>
-    <filter id="cl"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(0,0,0,0.9)" flood-opacity="1"/></filter>
-    <filter id="dg"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="rgba(255,255,255,0.5)"/></filter>
-  </defs>
-
-  <!--
-    Coordinate reference (820x900 viewBox):
-    Shittim       780, 348
-    Gilgal (base) 708, 328
-    Jericho       660, 370
-    Bethel        448, 292
-    Ai            490, 300  (questionable)
-    Gibeon        432, 395  (al-Jib)
-    Jerusalem     488, 458
-    Upper B.Horon 378, 390
-    Lower B.Horon 360, 345
-    Aijalon       338, 415
-    Beit Shemesh  355, 435
-    Makkedah      315, 452  (?)
-    Azekah        332, 508
-    Libnah        368, 548  (?)
-    Lachish       330, 598
-    Eglon         290, 648  (?)
-    Hebron        490, 592
-    Debir         445, 678  (?)
-
-    North campaign:
-    Merom         380, 172
-    Hazor         468, 138
-    Misrephoth    248, 122
-    Mizpeh valley 530, 130
-    Kedesh        520, 155
-    Sidon         252, 88
-  -->
-
-  <!-- ── CENTRAL CAMPAIGN (GREEN, Josh 6–9) ── -->
-  <g id="g-central">
-    <!-- 1: Shittim (east bank) → cross Jordan → Gilgal (west bank, NW of Jericho) -->
-    <path class="step-g step-1" d="M 760 355 Q 720 348 672 342"
-          stroke="#22cc44" stroke-width="5" fill="none" marker-end="url(#ag)" filter="url(#gg)" opacity="0.92"/>
-    <!-- 2: Gilgal → Jericho (south, very close) -->
-    <path class="step-g step-2" d="M 670 344 Q 665 358 658 372"
-          stroke="#22cc44" stroke-width="5" fill="none" marker-end="url(#ag)" filter="url(#gg)" opacity="0.92"/>
-    <!-- 3: Jericho → Bethel/Ai (west up hill country) -->
-    <path class="step-g step-3" d="M 656 372 Q 590 342 498 305"
-          stroke="#22cc44" stroke-width="5" fill="none" marker-end="url(#ag)" filter="url(#gg)" opacity="0.92"/>
-    <!-- 4: Ai → Gibeon (south-west) -->
-    <path class="step-g step-4" d="M 494 308 Q 470 352 436 398"
-          stroke="#22cc44" stroke-width="5" fill="none" marker-end="url(#ag)" filter="url(#gg)" opacity="0.92"/>
-    <!-- 5: Night march Gilgal → Gibeon (rescue, Josh 10) -->
-    <path class="step-g step-5" d="M 668 346 Q 580 362 438 400"
-          stroke="#22cc44" stroke-width="4.5" fill="none" stroke-dasharray="11,6" marker-end="url(#ag2)" filter="url(#gg)" opacity="0.78"/>
-  </g>
-
-  <!-- ── SOUTHERN CAMPAIGN (RED, Josh 10) ── -->
-  <g id="g-south">
-    <!-- 6: Gibeon → Upper Beth Horon (west pursuit) -->
-    <path class="step-r step-6" d="M 434 400 Q 410 396 386 394"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 7: Upper → Lower Beth Horon (descent NW) -->
-    <path class="step-r step-7" d="M 384 395 Q 372 372 360 350"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 8: Lower BH → Aijalon area → Beit Shemesh -->
-    <path class="step-r step-8" d="M 358 352 Q 348 386 352 434"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 9: → Makkedah -->
-    <path class="step-r step-9" d="M 350 436 Q 332 445 316 455"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 10: Makkedah → Azekah -->
-    <path class="step-r step-10" d="M 315 458 Q 318 482 328 508"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 11: Azekah → Libnah -->
-    <path class="step-r step-11" d="M 330 512 Q 346 530 362 550"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 12: Libnah → Lachish -->
-    <path class="step-r step-12" d="M 362 554 Q 348 576 330 600"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 13: Lachish → Eglon and back -->
-    <path class="step-r step-13" d="M 328 604 Q 308 625 286 650"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <path class="step-r step-13" d="M 286 654 Q 308 628 330 606"
-          stroke="#ee3322" stroke-width="3.5" fill="none" stroke-dasharray="7,5" marker-end="url(#ar2)" filter="url(#gr)" opacity="0.65"/>
-    <!-- 14: → Hebron (east) -->
-    <path class="step-r step-14" d="M 332 602 Q 404 596 484 596"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- 15: Hebron → Debir (SW) -->
-    <path class="step-r step-15" d="M 484 600 Q 466 638 444 678"
-          stroke="#ee3322" stroke-width="5" fill="none" marker-end="url(#ar)" filter="url(#gr)" opacity="0.92"/>
-    <!-- Return to Gilgal -->
-    <path class="step-r step-ret" d="M 444 680 Q 548 644 658 378"
-          stroke="#ee3322" stroke-width="3" fill="none" stroke-dasharray="8,7" marker-end="url(#ar2)" filter="url(#gr)" opacity="0.32"/>
-  </g>
-
-  <!-- ── STEP NUMBER BADGES ── -->
-  <!-- Green -->
-  <g id="badges-central">
-    <circle cx="722" cy="348" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="722" y="353" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">1</text>
-
-    <circle cx="664" cy="358" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="664" y="363" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">2</text>
-
-    <circle cx="576" cy="332" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="576" y="337" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">3</text>
-
-    <circle cx="462" cy="350" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="462" y="355" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">4</text>
-
-    <circle cx="560" cy="354" r="13" fill="#22cc44" stroke="#fff" stroke-width="2" filter="url(#gg)"/>
-    <text x="560" y="359" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">5</text>
-  </g>
-
-  <!-- Red -->
-  <g id="badges-south">
-    <circle cx="410" cy="395" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="410" y="400" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">6</text>
-
-    <circle cx="370" cy="370" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="370" y="375" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">7</text>
-
-    <circle cx="350" cy="406" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="350" y="411" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">8</text>
-
-    <circle cx="320" cy="447" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="320" y="452" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">9</text>
-
-    <circle cx="314" cy="483" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="314" y="488" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">10</text>
-
-    <circle cx="348" cy="532" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="348" y="537" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">11</text>
-
-    <circle cx="336" cy="578" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="336" y="583" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">12</text>
-
-    <circle cx="298" cy="628" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="298" y="633" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">13</text>
-
-    <circle cx="422" cy="596" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="422" y="601" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">14</text>
-
-    <circle cx="456" cy="652" r="13" fill="#ee3322" stroke="#fff" stroke-width="2" filter="url(#gr)"/>
-    <text x="456" y="657" text-anchor="middle" font-size="11" fill="#fff" font-family="Cinzel" font-weight="bold">15</text>
-  </g>
-
-  <!-- ── CITY DOTS & LABELS ── -->
-  <!--
-    Reference image coordinate mapping (820×900 viewBox):
-    Shittim       762, 356  (east of Jordan, far right)
-    Gilgal        668, 342  (WEST of Jordan, NW of Jericho — KEY FIX)
-    Jericho       656, 374  (just south of Gilgal, on Jordan rift)
-    Bethel        448, 295  (hill country, NW of Ai)
-    Ai            494, 308  (questionable, near Bethel)
-    Gibeon        434, 400  (al-Jib, NW of Jerusalem)
-    Jerusalem     492, 462  (centre landmark)
-    Shiloh        528, 252  (north of Bethel, hill country)
-    Lower BH      358, 350  (top of Beth Horon pass)
-    Upper BH      382, 396  (just east/below Lower BH on map — NOTE: geographically upper=east, lower=west)
-    Aijalon       338, 420  (valley below pass)
-    Beit Shemesh  356, 438
-    Makkedah      314, 456  (?)
-    Azekah        328, 510
-    Libnah        364, 552  (?)
-    Lachish       328, 600
-    Eglon         284, 652  (?)
-    Hebron        484, 598
-    Debir         442, 680  (?)
-  -->
-
-  <!-- Shittim -->
-  <circle cx="762" cy="356" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
-  <text x="770" y="351" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">什亭 Shittim</text>
-  <text x="770" y="363" font-size="8.5" fill="#ccc" font-family="Noto Serif TC" filter="url(#cl)">（東岸出發地）</text>
-
-  <!-- Gilgal — WEST of Jordan, NW of Jericho -->
-  <circle cx="668" cy="342" r="11" fill="#ff8844" stroke="#fff" stroke-width="2.5" filter="url(#dg)"/>
-  <circle cx="668" cy="342" r="6" fill="#ffcc88"/>
-  <text x="678" y="334" font-size="11" fill="#ffcc88" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">吉甲 Gilgal</text>
-  <text x="678" y="346" font-size="9" fill="#ffa060" font-family="Noto Serif TC" filter="url(#cl)">大本營（河西）</text>
-
-  <!-- Jericho -->
-  <circle cx="656" cy="375" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
-  <text x="610" y="368" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">耶利哥</text>
-  <text x="610" y="380" font-size="9" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Jericho</text>
-
-  <!-- Bethel -->
-  <circle cx="448" cy="295" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="428" y="285" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">伯特利 Bethel</text>
-
-  <!-- Ai (questionable) -->
-  <circle cx="494" cy="308" r="6" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="503" y="302" font-size="11" fill="#ffee88" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">艾城 Ai ?</text>
-
-  <!-- Gibeon (al-Jib) -->
-  <circle cx="434" cy="400" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
-  <text x="400" y="390" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">基遍 Gibeon</text>
-  <text x="400" y="402" font-size="8.5" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">(al-Jib) ☀太陽停住</text>
-
-  <!-- Jerusalem -->
-  <circle cx="492" cy="462" r="9" fill="#ffcc44" stroke="#fff" stroke-width="2.5" filter="url(#dg)"/>
-  <text x="504" y="457" font-size="12.5" fill="#ffe060" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">耶路撒冷</text>
-  <text x="504" y="470" font-size="9.5" fill="#ffd040" font-family="Noto Serif TC" filter="url(#cl)">Jerusalem</text>
-
-  <!-- Shiloh -->
-  <circle cx="528" cy="252" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="538" y="247" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">示羅 Shiloh</text>
-  <text x="538" y="259" font-size="8.5" fill="#e8c858" font-family="Noto Serif TC" filter="url(#cl)">（會幕）</text>
-
-  <!-- Lower Beth Horon -->
-  <circle cx="358" cy="350" r="6" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="266" y="342" font-size="9.5" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">下伯和崙</text>
-  <text x="266" y="354" font-size="8" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Lower Beth Horon</text>
-
-  <!-- Upper Beth Horon -->
-  <circle cx="382" cy="396" r="6" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="386" y="382" font-size="9.5" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">上伯和崙</text>
-  <text x="386" y="393" font-size="8" fill="#e0e0e0" font-family="Noto Serif TC" filter="url(#cl)">Upper Beth Horon</text>
-
-  <!-- Aijalon -->
-  <circle cx="338" cy="420" r="5.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.2" filter="url(#dg)"/>
-  <text x="280" y="418" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">亞雅崙 Aijalon</text>
-
-  <!-- Beit Shemesh -->
-  <circle cx="356" cy="438" r="5" fill="#e0e0e0" stroke="#ffee66" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="363" y="434" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">貝特謝梅什 Beit Shemesh</text>
-
-  <!-- Makkedah -->
-  <circle cx="314" cy="456" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="254" y="452" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">瑪基大</text>
-  <text x="254" y="464" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">Makkedah ? 五王被殺</text>
-
-  <!-- Azekah -->
-  <circle cx="328" cy="510" r="6.5" fill="#e0e0e0" stroke="#fff" stroke-width="1.5" filter="url(#dg)"/>
-  <text x="268" y="506" font-size="10.5" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">亞西加 Azekah</text>
-
-  <!-- Libnah -->
-  <circle cx="364" cy="552" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="374" y="548" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">立拿 Libnah ?</text>
-
-  <!-- Lachish -->
-  <circle cx="328" cy="600" r="7" fill="#e0e0e0" stroke="#fff" stroke-width="1.8" filter="url(#dg)"/>
-  <text x="268" y="596" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">拉吉 Lachish</text>
-
-  <!-- Eglon -->
-  <circle cx="284" cy="652" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="236" y="648" font-size="10" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">伊磯倫</text>
-  <text x="236" y="660" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">Eglon ?</text>
-
-  <!-- Hebron -->
-  <circle cx="484" cy="598" r="9" fill="#e0e0e0" stroke="#ffcc44" stroke-width="2.5" filter="url(#dg)"/>
-  <text x="496" y="592" font-size="12.5" fill="#ffe060" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">希伯崙 Hebron</text>
-  <text x="496" y="605" font-size="9" fill="#ffd040" font-family="Noto Serif TC" filter="url(#cl)">★ 迦勒所求之地</text>
-
-  <!-- Debir -->
-  <circle cx="442" cy="680" r="5.5" fill="#e0e0e0" stroke="#ffee66" stroke-width="2" stroke-dasharray="4,2" filter="url(#dg)"/>
-  <text x="452" y="675" font-size="11" fill="#fff" font-family="Noto Serif TC" font-weight="bold" filter="url(#cl)">底璧 Debir ?</text>
-  <text x="452" y="687" font-size="8.5" fill="#ffee88" font-family="Noto Serif TC" filter="url(#cl)">押撒求泉水</text>
-
-  <!-- Legend box -->
-  <rect x="14" y="14" width="225" height="88" rx="7" fill="rgba(0,0,0,0.78)" stroke="#d4a830" stroke-width="1.2"/>
-  <line x1="25" y1="38" x2="68" y2="38" stroke="#22cc44" stroke-width="4.5"/>
-  <circle cx="68" cy="38" r="11" fill="#22cc44" stroke="#fff" stroke-width="1.5"/>
-  <text x="68" y="43" text-anchor="middle" font-size="10" fill="#fff" font-family="Cinzel">1</text>
-  <text x="84" y="34" font-size="10" fill="#66ff88" font-family="Noto Serif TC" font-weight="bold">中路戰役（書6–9）</text>
-  <text x="84" y="46" font-size="8.5" fill="#88cc99" font-family="Noto Serif TC">渡河→耶利哥→艾城→基遍</text>
-
-  <line x1="25" y1="68" x2="68" y2="68" stroke="#ee3322" stroke-width="4.5"/>
-  <circle cx="68" cy="68" r="11" fill="#ee3322" stroke="#fff" stroke-width="1.5"/>
-  <text x="68" y="73" text-anchor="middle" font-size="10" fill="#fff" font-family="Cinzel">6</text>
-  <text x="84" y="64" font-size="10" fill="#ff8888" font-family="Noto Serif TC" font-weight="bold">南路戰役（書10）</text>
-  <text x="84" y="76" font-size="8.5" fill="#dd8888" font-family="Noto Serif TC">伯和崙→拉吉→希伯崙</text>
-
-  <rect x="25" y="84" width="10" height="10" rx="2" fill="none" stroke="#ffee66" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="40" y="93" font-size="8.5" fill="#ddcc66" font-family="Noto Serif TC">? 位置存疑  Exact Location Questionable</text>
-
-  </svg>
-  </div><!-- end layer-conquest -->
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- LAYER 4: NORTH CAMPAIGN (Josh 11)       -->
-  <!-- ═══════════════════════════════════════ -->
-  <div class="map-layer" id="layer-north">
-  <svg viewBox="0 0 820 900" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <polygon points="0 0, 10 5, 0 10" fill="#2288ee"/>
-    </marker>
-    <marker id="ab2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-      <polygon points="0 0, 7 3.5, 0 7" fill="#2288ee"/>
-    </marker>
-    <filter id="gb"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(30,100,220,0.7)"/></filter>
-    <filter id="ncl"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(0,0,0,0.9)" flood-opacity="1"/></filter>
-    <filter id="ndg"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="rgba(255,255,255,0.5)"/></filter>
-  </defs>
-
-  <!-- A: March north from Gilgal to Waters of Merom -->
-  <path d="M 668 342 Q 640 280 580 230 Q 530 192 452 172"
-        stroke="#2288ee" stroke-width="5" fill="none" marker-end="url(#ab)" filter="url(#gb)" opacity="0.92"/>
-  <!-- B: Merom → pursue west to Misrephoth Maim -->
-  <path d="M 450 174 Q 370 148 255 125"
-        stroke="#2288ee" stroke-width="4.5" fill="none" stroke-dasharray="10,5" marker-end="url(#ab2)" filter="url(#gb)" opacity="0.85"/>
-  <!-- C: Merom → pursue east to Mizpeh valley -->
-  <path d="M 450 174 Q 492 152 535 132"
-        stroke="#2288ee" stroke-width="4.5" fill="none" stroke-dasharray="10,5" marker-end="url(#ab2)" filter="url(#gb)" opacity="0.85"/>
-  <!-- D: Attack Hazor -->
-  <path d="M 535 133 Q 505 132 470 138"
-        stroke="#2288ee" stroke-width="5" fill="none" marker-end="url(#ab)" filter="url(#gb)" opacity="0.92"/>
-  <!-- Return to Gilgal -->
-  <path d="M 470 140 Q 530 190 600 270 Q 640 315 666 340"
-        stroke="#2288ee" stroke-width="3" fill="none" stroke-dasharray="8,7" marker-end="url(#ab2)" filter="url(#gb)" opacity="0.45"/>
-
-  <!-- Step badges -->
-  <circle cx="596" cy="252" r="13" fill="#2288ee" stroke="#fff" stroke-width="2" filter="url(#gb)"/>
-  <text x="596" y="257" text-anchor="middle" font-size="10" fill="#fff" font-family="Cinzel" font-weight="bold">A</text>
-  <circle cx="350" cy="136" r="13" fill="#2288ee" stroke="#fff" stroke-width="2" filter="url(#gb)"/>
-  <text x="350" y="141" text-anchor="middle" font-size="10" fill="#fff" font-family="Cinzel" font-weight="bold">B</text>
-  <circle cx="502" cy="140" r="13" fill="#2288ee" stroke="#fff" stroke-width="2" filter="url(#gb)"/>
-  <text x="502" y="145" text-anchor="middle" font-size="10" fill="#fff" font-family="Cinzel" font-weight="bold">C</text>
-
-  <!-- Cities -->
-  <!-- Waters of Merom -->
-  <circle cx="452" cy="174" r="8" fill="#2288ee" stroke="#fff" stroke-width="2" filter="url(#ndg)"/>
-  <text x="462" y="168" font-size="11.5" fill="#88ccff" font-family="Noto Serif TC" font-weight="bold" filter="url(#ncl)">米倫水</text>
-  <text x="462" y="181" font-size="8.5" fill="#66aaee" font-family="Noto Serif TC" filter="url(#ncl)">Waters of Merom  決戰地</text>
-
-  <!-- Hazor -->
-  <circle cx="470" cy="140" r="8" fill="#2288ee" stroke="#fff" stroke-width="2" filter="url(#ndg)"/>
-  <text x="482" y="134" font-size="12" fill="#88ccff" font-family="Noto Serif TC" font-weight="bold" filter="url(#ncl)">夏瑣 Hazor</text>
-  <text x="482" y="146" font-size="8.5" fill="#66aaee" font-family="Noto Serif TC" filter="url(#ncl)">聯盟主城・焚毀</text>
-
-  <!-- Misrephoth Maim -->
-  <circle cx="253" cy="125" r="6" fill="#2288ee" stroke="#fff" stroke-width="1.5" filter="url(#ndg)"/>
-  <text x="260" y="120" font-size="9.5" fill="#88ccff" font-family="Noto Serif TC" font-weight="bold" filter="url(#ncl)">米施利弗瑪</text>
-  <text x="260" y="131" font-size="8" fill="#66aaee" font-family="Noto Serif TC" filter="url(#ncl)">Misrephoth Maim（西追至此）</text>
-
-  <!-- Mizpeh valley -->
-  <circle cx="537" cy="132" r="6" fill="#2288ee" stroke="#fff" stroke-width="1.5" filter="url(#ndg)"/>
-  <text x="546" y="128" font-size="9.5" fill="#88ccff" font-family="Noto Serif TC" font-weight="bold" filter="url(#ncl)">米斯巴谷</text>
-  <text x="546" y="139" font-size="8" fill="#66aaee" font-family="Noto Serif TC" filter="url(#ncl)">Mizpeh Valley（東追至此）</text>
-
-  <!-- Sidon (north) -->
-  <circle cx="255" cy="88" r="5.5" fill="#2288ee" stroke="#fff" stroke-width="1.2" filter="url(#ndg)"/>
-  <text x="264" y="84" font-size="9.5" fill="#88ccff" font-family="Noto Serif TC" font-weight="bold" filter="url(#ncl)">大西頓 Sidon</text>
-  <text x="264" y="95" font-size="8" fill="#66aaee" font-family="Noto Serif TC" filter="url(#ncl)">（追擊至此）</text>
-  <path d="M 253 125 Q 252 106 255 90" stroke="#2288ee" stroke-width="3" fill="none" stroke-dasharray="6,4" opacity="0.65" marker-end="url(#ab2)"/>
-
-  <!-- Legend -->
-  <rect x="14" y="14" width="198" height="52" rx="6" fill="rgba(0,0,0,0.78)" stroke="#2288ee" stroke-width="1.2"/>
-  <line x1="24" y1="36" x2="60" y2="36" stroke="#2288ee" stroke-width="4.5"/>
-  <circle cx="60" cy="36" r="11" fill="#2288ee" stroke="#fff" stroke-width="1.5"/>
-  <text x="60" y="41" text-anchor="middle" font-size="10" fill="#fff" font-family="Cinzel">A</text>
-  <text x="77" y="32" font-size="10" fill="#88ccff" font-family="Noto Serif TC" font-weight="bold">北方戰役（書11）</text>
-  <text x="77" y="44" font-size="8.5" fill="#6698cc" font-family="Noto Serif TC">夏瑣聯盟→米倫決戰</text>
-  <line x1="24" y1="56" x2="198" y2="56" stroke="rgba(34,136,238,0.2)" stroke-width="0.5"/>
-
-  </svg>
-  </div><!-- end layer-north -->
-
-</div><!-- end map-wrap -->
-</div><!-- end fs-container -->
-
-<script>
-// ─── LAYER STATE ───
-const layers = { conquest: true, tribes: false, north: false };
-
-function toggleLayer(name) {
-  layers[name] = !layers[name];
-  const el = document.getElementById('layer-' + name);
-  const btn = document.getElementById('btn-' + name);
-  if (layers[name]) {
-    el.style.opacity = name === 'tribes' ? (document.getElementById('tribe-opacity').value / 100) : '1';
-    el.style.pointerEvents = 'none';
-    btn.classList.add('active');
-  } else {
-    el.style.opacity = '0';
-    btn.classList.remove('active');
-    // also reset slider if turning off tribes
-    if (name === 'tribes') document.getElementById('tribe-opacity').value = 0;
-  }
-}
-
-function setTribesOpacity(val) {
-  const el = document.getElementById('layer-tribes');
-  const op = val / 100;
-  el.style.opacity = op;
-  el.style.pointerEvents = 'none';
-  layers.tribes = op > 0;
-  document.getElementById('btn-tribes').classList.toggle('active', op > 0);
-}
-
-// ─── LESSON DATA ───
-const lessons = {
-  central: {
-    title: '中路戰役  書6–9章',
-    color: '#22cc44',
-    steps: [
-      { label: '起點：什亭出發', text: '<strong>什亭（Shittim）</strong>是約書亞大軍渡河前的紮營地，位於約但河東岸。兩位探子從這裡秘密前往耶利哥，回報後全軍準備行動。<span class="verse">書2:1, 3:1</span>', show: ['g-central'], highlight: [1] },
-      { label: '步驟①渡河→吉甲', text: '全體以色列人<strong>奇蹟渡過約但河</strong>，約櫃帶頭，河水截斷。在西岸設立<strong>吉甲大本營</strong>，豎立十二塊石頭紀念。吉甲成為此後歷次出征的後勤基地。<span class="verse">書3–4章</span>', show: ['g-central'], highlight: [1] },
-      { label: '步驟②攻取耶利哥', text: '全軍<strong>繞城七日</strong>，第七日吹號呼喊，<strong>城牆倒塌</strong>。喇合全家蒙保護。耶利哥被焚毀，財物歸耶和華庫中。<span class="verse">書6章</span>', show: ['g-central'], highlight: [2] },
-      { label: '步驟③攻取艾城', text: '首次攻艾失敗（亞干犯罪），解決後再攻得勝。約書亞設<strong>埋伏計</strong>：一隊誘敵出城，另一隊突入燒城，三萬人夾擊殲滅艾城。<span class="verse">書7–8章</span>', show: ['g-central'], highlight: [3] },
-      { label: '步驟④基遍人詐和', text: '<strong>基遍人（希未人）</strong>假冒遠方人，騙取以色列立約。約書亞未求問神就立約，後發現真相卻不能毀約，使基遍人成為劈柴挑水的人。<span class="verse">書9章</span>', show: ['g-central'], highlight: [4] },
-      { label: '步驟⑤夜行救基遍', text: '五王聯盟來攻基遍，基遍人急告約書亞。以色列人<strong>連夜從吉甲急行軍</strong>（上升約1000公尺）馳援，此為南路戰役開端。<strong>太陽停住</strong>助戰。<span class="verse">書10:1-14</span>', show: ['g-central'], highlight: [5] },
-    ]
-  },
-  south: {
-    title: '南路戰役  書10章',
-    color: '#ee3322',
-    steps: [
-      { label: '步驟⑥基遍出擊', text: '以色列軍從<strong>基遍追擊</strong>亞摩利五王聯軍，向西沿伯和崙山道追趕。<strong>冰雹從天降下</strong>，死於冰雹者多於死於刀下者。<span class="verse">書10:10-11</span>', show: ['g-south'], highlight: [6] },
-      { label: '步驟⑦上伯和崙山道', text: '聯軍沿<strong>伯和崙上坡</strong>逃往沿海平原方向。這是耶路撒冷山地下降地中海沿岸的最重要山口，海拔落差達600公尺，是古代的戰略要道。<span class="verse">書10:10</span>', show: ['g-south'], highlight: [7] },
-      { label: '步驟⑧下伯和崙→亞雅崙谷', text: '追至<strong>下伯和崙</strong>（Lower Beth Horon），進入<strong>亞雅崙谷</strong>。這裡太陽與月亮停住：「日頭，你在基遍停住！月亮，你在亞雅崙谷停住！」<span class="verse">書10:12</span>', show: ['g-south'], highlight: [8] },
-      { label: '步驟⑨到達瑪基大', text: '五王躲入<strong>瑪基大洞中</strong>，約書亞命人用大石封住。殘敵退入堅固城，以色列人繼續追擊直到入城，五王後被處死掛樹。<span class="verse">書10:16-27</span>', show: ['g-south'], highlight: [9] },
-      { label: '步驟⑩攻取亞西加', text: '<strong>亞西加（Azekah）</strong>被攻陷。此地後來在大衛對抗歌利亞時再度出現（撒上17:1），是非利士平原進入山地的入口要塞。<span class="verse">書10:28-29</span>', show: ['g-south'], highlight: [10] },
-      { label: '步驟⑪攻取立拿', text: '<strong>立拿（Libnah）</strong>陷落。確切位置仍有爭議，學者多認為在拉吉附近。約書亞繼續揮軍南下，形成「滾雪球」式的連續征服。<span class="verse">書10:29-30</span>', show: ['g-south'], highlight: [11] },
-      { label: '步驟⑫攻取拉吉', text: '<strong>拉吉（Lachish）</strong>是南方最重要的城市之一，位於扼守前往別是巴道路的要衝。後來在希西家王時代成為亞述人攻擊猶大的主要目標（賽36章）。<span class="verse">書10:31-32</span>', show: ['g-south'], highlight: [12] },
-      { label: '步驟⑬拉吉→伊磯倫', text: '<strong>伊磯倫（Eglon）</strong>被攻取（一日之內）。約書亞在拉吉與伊磯倫之間來回，展現了精準的機動戰術。五城平原全數落入手中。<span class="verse">書10:34-35</span>', show: ['g-south'], highlight: [13] },
-      { label: '步驟⑭攻取希伯崙', text: '<strong>希伯崙（Hebron）</strong>是亞伯拉罕、以撒、雅各長眠之地（創23章）。此城海拔930公尺，是南部山地最重要的城市。後來迦勒以85歲高齡特別請求此地為業。<span class="verse">書10:36-37, 14:13-14</span>', show: ['g-south'], highlight: [14] },
-      { label: '步驟⑮攻取底璧', text: '<strong>底璧（Debir）</strong>是南路戰役最後一城。迦勒女兒<strong>押撒</strong>嫁給攻取底璧的俄陀聶，並智慧地向父親求得上下泉水，成為聖經中女性勇敢發聲的美好典範。<span class="verse">書10:38-39, 15:15-19</span>', show: ['g-south'], highlight: [15] },
-    ]
-  },
-  north: {
-    title: '北方戰役  書11章',
-    color: '#2288ee',
-    steps: [
-      { label: '北方聯盟集結', text: '<strong>夏瑣王雅賓</strong>聽聞南方各城陷落，聯合北方諸王在<strong>米倫水旁</strong>集結，兵馬眾多「如海邊的沙」，又有馬匹車輛。耶和華吩咐約書亞不要懼怕。<span class="verse">書11:1-6</span>', show: [], highlight: [] },
-      { label: '步驟A：北征→米倫決戰', text: '約書亞<strong>從吉甲急速出發</strong>北上，突然攻擊在米倫水旁的聯軍大營。耶和華將敵人交在手中，以色列得大勝。這是繼渡河以來最重要的一場戰役。<span class="verse">書11:7</span>', show: [], highlight: ['A'] },
-      { label: '步驟B：西追至米施利弗瑪', text: '得勝後<strong>向西追擊</strong>逃竄的敵軍，一直追到地中海沿岸的<strong>米施利弗瑪（Misrephoth Maim）</strong>，並追到西頓（今日黎巴嫩境內）。<span class="verse">書11:8</span>', show: [], highlight: ['B'] },
-      { label: '步驟C：東追至米斯巴谷', text: '同時<strong>向東追擊</strong>至<strong>米斯巴谷</strong>。南北夾擊，無一逃脫。約書亞照耶和華命令割斷馬蹄、焚燒車輛，不倚靠人的武器。<span class="verse">書11:8-9</span>', show: [], highlight: ['C'] },
-      { label: '焚燒夏瑣', text: '約書亞回師攻取<strong>夏瑣</strong>，殺其王雅賓，並<strong>焚燒此城</strong>。夏瑣是當時迦南北方最大的城邦，考古證實約西元前1230年確有一場大火摧毀此城。<span class="verse">書11:10-11</span>', show: [], highlight: [] },
-      { label: '書12章：征服總結', text: '<strong>書12章</strong>列出約書亞征服的<strong>31位迦南王</strong>名單（加上摩西時代東岸2王，共33王）。這是一份勝利清單，也是神信實應許的見證——「耶和華將一切仇敵都交在以色列手中」。<span class="verse">書11:23, 12:1-24</span>', show: [], highlight: [] },
-    ]
-  },
-  tribes: {
-    title: '支派分地  書13–15章',
-    color: '#d4a830',
-    steps: [
-      { label: '概覽：分地的原則', text: '<strong>書13章開頭</strong>：「約書亞年紀老邁，耶和華對他說，你年紀已老，還有許多地尚未得為業。」分地的工作由<strong>祭司以利亞撒與約書亞</strong>共同主持，以抽籤決定（神的旨意）。<span class="verse">書13:1, 14:2</span>', show: ['tribes'], highlight: [] },
-      { label: '河東三支派（書13章）', text: '<strong>流便、迦得、瑪拿西東半支派</strong>已由摩西在世時分得約但河東的地業。三個橘色區域代表摩押高原至巴珊的廣大土地。特別：<strong>利未支派不分土地</strong>，耶和華是他們的產業。<span class="verse">書13:8-33</span>', show: ['tribes'], highlight: ['t-reuben','t-gad','t-emanasseh'] },
-      { label: '猶大支派（書15章）', text: '<strong>猶大支派</strong>分得南方最廣大的地業，從死海西岸延伸至地中海，南至加低斯巴尼亞（曠野邊界），北接便雅憫。<strong>迦勒以信心得希伯崙</strong>是本章最感人的故事。<span class="verse">書14:6-15, 15:1-63</span>', show: ['tribes'], highlight: ['t-judah'] },
-      { label: '迦勒的信心（書14章）', text: '<strong>迦勒：「耶和華應許的山地求你給我」</strong>。85歲的迦勒回憶45年前的承諾——他與約書亞是唯二信實的探子。如今他仍壯健如昔，憑信心求得<strong>希伯崙山地</strong>，攻下亞納族人。<span class="verse">書14:6-15</span>', show: ['tribes'], highlight: ['t-judah'] },
-      { label: '押撒求水源（書15章）', text: '<strong>押撒</strong>是迦勒女兒，嫁給攻取底璧的俄陀聶。她騎驢時向父親開口：「求你賜福給我……求你給我水泉。」迦勒便給了她上泉下泉。女兒的智慧與信心令人動容。<span class="verse">書15:15-19</span>', show: ['tribes'], highlight: ['t-judah'] },
-      { label: '便雅憫與其他支派', text: '<strong>便雅憫</strong>位於猶大與以法蓮之間，包括耶利哥、耶路撒冷南境、基遍等地。<strong>以法蓮</strong>在中部高地，<strong>瑪拿西西</strong>在其北方，示羅（會幕所在）位於以法蓮境內。<span class="verse">書16–17章</span>', show: ['tribes'], highlight: ['t-benjamin','t-ephraim','t-wmanasseh'] },
-      { label: '北方支派', text: '<strong>以薩迦</strong>得耶斯列平原（最肥沃農地）；<strong>西布倫</strong>在加利利南山地；<strong>拿弗他利</strong>在加利利海西北；<strong>亞設</strong>沿地中海北岸。但支派因無法逐出亞摩利人，後遷往北方但城。<span class="verse">書19章</span>', show: ['tribes'], highlight: ['t-issachar','t-zebulun','t-naphtali','t-asher','t-dan'] },
-      { label: '未竟之業', text: '<strong>書15:63</strong>：「猶大人不能把住耶路撒冷的耶布斯人……」這是整卷書的深刻伏筆——征服尚未完全，仍有未得之地。<strong>信仰之旅沒有終點</strong>，需要持續倚靠神才能完成所託付的使命。<span class="verse">書13:1-6, 15:63</span>', show: ['tribes'], highlight: ['t-philistine'] },
-    ]
-  }
-};
-
-let currentLesson = null;
-let currentStep = 0;
-
-function startLesson(name) {
-  currentLesson = name;
-  currentStep = 0;
-
-  // Setup layers for lesson
-  if (name === 'central' || name === 'south') {
-    if (!layers.conquest) toggleLayer('conquest');
-    if (layers.north) toggleLayer('north');
-    if (layers.tribes) { layers.tribes = false; document.getElementById('layer-tribes').style.opacity = 0; document.getElementById('btn-tribes').classList.remove('active'); }
-  } else if (name === 'north') {
-    if (layers.conquest) toggleLayer('conquest');
-    if (!layers.north) toggleLayer('north');
-    if (layers.tribes) { layers.tribes = false; document.getElementById('layer-tribes').style.opacity = 0; document.getElementById('btn-tribes').classList.remove('active'); }
-  } else if (name === 'tribes') {
-    if (layers.conquest) toggleLayer('conquest');
-    if (layers.north) toggleLayer('north');
-    document.getElementById('layer-tribes').style.opacity = '0.78';
-    document.getElementById('tribe-opacity').value = 78;
-    layers.tribes = true;
-    document.getElementById('btn-tribes').classList.add('active');
-  }
-
-  document.getElementById('lesson-bar').classList.add('visible');
-  renderLesson();
-}
-
-function exitLesson() {
-  currentLesson = null;
-  document.getElementById('lesson-bar').classList.remove('visible');
-  // restore all opacity
-  restoreHighlight();
-}
-
-function lessonStep(dir) {
-  if (!currentLesson) return;
-  const ls = lessons[currentLesson];
-  currentStep = Math.max(0, Math.min(ls.steps.length - 1, currentStep + dir));
-  renderLesson();
-}
-
-function renderLesson() {
-  const ls = lessons[currentLesson];
-  const step = ls.steps[currentStep];
-
-  document.getElementById('lesson-title').textContent = ls.title + `  (${currentStep+1}/${ls.steps.length})`;
-  document.getElementById('lesson-text').innerHTML = `<strong style="color:${ls.color}">${step.label}</strong><br>${step.text}`;
-
-  // Dots
-  const dotsEl = document.getElementById('lesson-dots');
-  dotsEl.innerHTML = '';
-  ls.steps.forEach((s, i) => {
-    const d = document.createElement('div');
-    d.className = 'lesson-dot' + (i === currentStep ? ' active' : (i < currentStep ? ' done' : ''));
-    d.onclick = () => { currentStep = i; renderLesson(); };
-    dotsEl.appendChild(d);
-  });
-
-  // Layer visibility for this step
-  const step_data = ls.steps[currentStep];
-  applyStepHighlight(step_data);
-}
-
-function applyStepHighlight(step_data) {
-  // For tribes lesson: highlight specific tribe paths
-  if (currentLesson === 'tribes') {
-    // Reset all tribes opacity
-    document.querySelectorAll('#layer-tribes path[id^="t-"]').forEach(p => {
-      p.style.opacity = '0.35';
-    });
-    if (step_data.highlight && step_data.highlight.length) {
-      step_data.highlight.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.opacity = '0.88';
-      });
-    } else {
-      // Show all if no specific highlight
-      document.querySelectorAll('#layer-tribes path[id^="t-"]').forEach(p => {
-        p.style.opacity = '0.78';
-      });
-    }
-    return;
-  }
-
-  // For conquest lessons: highlight step badges
-  // Dim everything first
-  document.querySelectorAll('#layer-conquest circle, #layer-conquest path.step-g, #layer-conquest path.step-r').forEach(el => {
-    el.style.opacity = '0.18';
-  });
-  document.querySelectorAll('#layer-north circle, #layer-north path').forEach(el => {
-    el.style.opacity = '0.18';
-  });
-
-  if (!step_data.highlight || step_data.highlight.length === 0) {
-    // Show all
-    restoreHighlight();
-    return;
-  }
-
-  // Highlight current step number elements
-  step_data.highlight.forEach(num => {
-    // Highlight badge circles and paths with matching step class
-    document.querySelectorAll(`#layer-conquest .step-${num}, #layer-north .step-${num}`).forEach(el => {
-      el.style.opacity = '1';
-    });
-    // Also brighten the corresponding badge
-    document.querySelectorAll(`#layer-conquest circle, #layer-north circle`).forEach(c => {
-      if (c.nextElementSibling && c.nextElementSibling.textContent == num) {
-        c.style.opacity = '1';
-        c.nextElementSibling.style.opacity = '1';
-      }
-    });
-  });
-
-  // Always show city dots
-  document.querySelectorAll('#layer-conquest circle[r="7"], #layer-conquest circle[r="6"], #layer-conquest circle[r="9"], #layer-conquest circle[r="10"]').forEach(c => {
-    c.style.opacity = '0.7';
-  });
-}
-
-function restoreHighlight() {
-  document.querySelectorAll('#layer-conquest *, #layer-north *, #layer-tribes path[id^="t-"]').forEach(el => {
-    el.style.opacity = '';
-  });
-}
-
-// ─── FULLSCREEN ───
-function toggleFS() {
-  const el = document.getElementById('fs-container');
-  if (!document.fullscreenElement) {
-    (el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen).call(el);
-  } else {
-    (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
-  }
-}
-
-// ─── FULLSCREEN ASPECT RATIO ENFORCEMENT ───
-// SVG viewBox is 820×900 → ratio = 820/900 ≈ 0.9111
-const MAP_RATIO = 820 / 900;
-
-function fitMapInFullscreen() {
-  const fsc = document.getElementById('fs-container');
-  const mapWrap = document.getElementById('map-wrap');
-  const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
-  if (!isFS) {
-    // Restore normal mode
-    mapWrap.style.width = '';
-    mapWrap.style.height = '';
-    mapWrap.style.maxWidth = '';
-    mapWrap.style.maxHeight = '';
-    return;
-  }
-  // Available height = viewport minus toolbar and lesson bar heights
-  const toolbar = document.querySelector('.toolbar');
-  const lessonBar = document.getElementById('lesson-bar');
-  const tbH = toolbar ? toolbar.offsetHeight : 0;
-  const lbH = (lessonBar && lessonBar.classList.contains('visible')) ? lessonBar.offsetHeight : 0;
-  const padding = 28; // top+bottom padding
-  const availH = window.screen.height - tbH - lbH - padding;
-  const availW = window.screen.width - 20;
-
-  // Fit map preserving ratio
-  let mapW = availW;
-  let mapH = mapW / MAP_RATIO;
-  if (mapH > availH) {
-    mapH = availH;
-    mapW = mapH * MAP_RATIO;
-  }
-  mapWrap.style.width = mapW + 'px';
-  mapWrap.style.height = mapH + 'px';
-  mapWrap.style.maxWidth = mapW + 'px';
-  mapWrap.style.maxHeight = mapH + 'px';
-  mapWrap.style.flex = 'none';
-}
-
-document.addEventListener('fullscreenchange', fitMapInFullscreen);
-document.addEventListener('webkitfullscreenchange', fitMapInFullscreen);
-window.addEventListener('resize', fitMapInFullscreen);
-document.addEventListener('keydown', e => {
-  if (!currentLesson) return;
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') lessonStep(1);
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') lessonStep(-1);
-  if (e.key === 'Escape') exitLesson();
-});
-
-// Init: show conquest layer active
-document.getElementById('layer-tribes').style.opacity = '0';
-document.getElementById('layer-north').style.opacity = '0';
-</script>
 </body>
 </html>
