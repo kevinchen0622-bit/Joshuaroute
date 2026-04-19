@@ -559,6 +559,17 @@ input[type=range] { width: 80px; accent-color: var(--gold); }
 
   <!-- ═══════════════════════════════════════════════════ -->
   <!-- LAYER 2: TRIBAL ALLOCATION (transparent overlay)   -->
+  <!-- Coordinate reference (matches base map):           -->
+  <!--   Jordan River  x≈658, runs y=88→545              -->
+  <!--   Sea of Galilee cx=672,cy=72                      -->
+  <!--   Dead Sea      cx=724,cy=652 (large ellipse)      -->
+  <!--   Gilgal        668,342  (west bank, near Jericho) -->
+  <!--   Jericho       656,375                            -->
+  <!--   Jerusalem     492,462                            -->
+  <!--   Hebron        484,598                            -->
+  <!--   Shiloh        528,252                            -->
+  <!-- West tribes:  x = 188 → 658                       -->
+  <!-- East tribes:  x = 668 → 820                       -->
   <!-- ═══════════════════════════════════════════════════ -->
   <div class="map-layer" id="layer-tribes">
   <svg viewBox="0 0 820 900" xmlns="http://www.w3.org/2000/svg">
@@ -568,63 +579,257 @@ input[type=range] { width: 80px; accent-color: var(--gold); }
       <path d="M0 7 L7 0" stroke="#a08060" stroke-width="0.9"/>
     </pattern>
     <filter id="tlbl">
-      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="rgba(0,0,0,0.9)" flood-opacity="1"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="rgba(0,0,0,0.95)" flood-opacity="1"/>
     </filter>
   </defs>
 
-  <!-- Transjordan tribes -->
-  <path id="t-emanasseh" d="M 395 218 L 530 218 L 530 378 L 390 378 L 390 338 L 395 218" fill="#d4a870" opacity="0.78"/>
-  <path id="t-gad" d="M 390 378 L 530 378 L 530 542 L 390 542 L 388 455 Z" fill="#c08858" opacity="0.78"/>
-  <path id="t-reuben" d="M 390 542 L 530 542 L 530 700 L 372 712 L 382 648 L 388 588 Z" fill="#c89060" opacity="0.78"/>
+  <!-- ══════════════════════════════════════════ -->
+  <!-- TRANSJORDAN (EAST) TRIBES — x: 668 → 820 -->
+  <!-- ══════════════════════════════════════════ -->
+  <!--
+    書13:29-31 瑪拿西東：基列北部＋巴珊全地
+      北界：黑門山（地圖北邊 y=0）
+      南界：約 y=328（雅木克河附近）
+      東界：x=820（地圖右邊）
+      西界：約但河 x=658，但加利利海東側
+  -->
+  <path id="t-emanasseh"
+    d="M 672 88 L 820 88 L 820 328 L 668 328 L 665 260 L 668 180 Z"
+    fill="#d4a870" opacity="0.75"/>
 
-  <!-- West Jordan tribes -->
-  <path id="t-asher" d="M 230 0 L 215 95 L 218 165 L 248 178 L 272 212 L 308 175 L 328 150 L 320 88 L 355 0 Z" fill="#a0cc88" opacity="0.78"/>
-  <path id="t-naphtali" d="M 355 0 L 560 0 L 570 90 L 580 130 L 558 162 L 528 172 L 498 158 L 448 140 L 395 110 L 355 90 Z" fill="#88c070" opacity="0.78"/>
-  <path id="t-zebulun" d="M 308 175 L 328 150 L 355 90 L 395 110 L 448 140 L 498 158 L 528 172 L 540 202 L 525 222 L 488 232 L 445 228 L 398 222 L 362 215 L 330 210 Z" fill="#b0d890" opacity="0.78"/>
-  <path id="t-issachar" d="M 330 210 L 362 215 L 398 222 L 445 228 L 488 232 L 525 222 L 540 262 L 522 280 L 478 286 L 428 282 L 376 278 L 340 272 Z" fill="#c8e898" opacity="0.78"/>
-  <path id="t-wmanasseh" d="M 218 165 L 248 178 L 272 212 L 308 175 L 330 210 L 340 272 L 376 278 L 428 282 L 478 286 L 522 280 L 540 338 L 522 356 L 468 362 L 408 358 L 355 355 L 308 348 L 272 330 L 250 308 L 248 268 Z" fill="#98cc80" opacity="0.78"/>
-  <path id="t-ephraim" d="M 272 330 L 308 348 L 355 355 L 408 358 L 468 362 L 522 356 L 538 408 L 520 422 L 468 428 L 405 426 L 342 422 L 298 418 L 272 400 Z" fill="#80c068" opacity="0.78"/>
-  <path id="t-dan" d="M 188 338 L 272 330 L 272 400 L 298 418 L 285 432 L 255 440 L 228 438 L 188 415 Z" fill="#b8e0a0" opacity="0.78"/>
-  <path id="t-benjamin" d="M 298 418 L 342 422 L 405 426 L 468 428 L 520 422 L 538 508 L 522 520 L 465 524 L 398 522 L 335 518 L 295 512 L 285 475 Z" fill="#e0d888" opacity="0.78"/>
-  <path id="t-judah" d="M 188 415 L 295 512 L 335 518 L 398 522 L 465 524 L 522 520 L 538 620 L 522 710 L 475 760 L 418 782 L 360 770 L 295 742 L 248 680 L 232 598 Z" fill="#88b870" opacity="0.78"/>
-  <path id="t-simeon" d="M 255 685 L 390 692 L 390 768 L 360 770 L 295 742 L 255 715 Z" fill="#a8d088" opacity="0.78"/>
-  <path id="t-philistine" d="M 188 415 L 228 438 L 255 440 L 295 512 L 188 480 Z" fill="url(#th)" opacity="0.88"/>
+  <!--
+    書13:24-28 迦得：基列南半部＋耶利哥對面平原
+      北界：約 y=328（雅木克河）
+      南界：約 y=480（亞嫩河以北）
+      包含基列拉末、瑪哈念、疏割等
+  -->
+  <path id="t-gad"
+    d="M 668 328 L 820 328 L 820 488 L 668 488 L 660 455 L 660 370 L 665 340 Z"
+    fill="#c08858" opacity="0.75"/>
 
-  <!-- Tribe labels -->
-  <text x="462" y="298" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">瑪拿西（東）</text>
-  <text x="462" y="312" text-anchor="middle" font-size="8.5" fill="#3a6020" font-family="Noto Serif TC" filter="url(#tlbl)">摩西已分</text>
+  <!--
+    書13:15-23 流便：亞嫩河（南界）到希實本
+      北界：約 y=488（亞嫩河北岸）
+      南界：約 y=648（亞嫩河 = 今天的Arnon/Wadi Mujib）
+      包含底本、基列、米底巴等摩押高原城市
+  -->
+  <path id="t-reuben"
+    d="M 668 488 L 820 488 L 820 660 L 668 660 L 660 590 L 660 508 Z"
+    fill="#c89060" opacity="0.75"/>
 
-  <text x="462" y="462" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">迦得</text>
-  <text x="462" y="476" text-anchor="middle" font-size="8.5" fill="#3a6020" font-family="Noto Serif TC" filter="url(#tlbl)">（基列）摩西已分</text>
+  <!-- River border line (Jordan) -->
+  <line x1="660" y1="88" x2="660" y2="660" stroke="#3a5818" stroke-width="2" stroke-dasharray="8,5" opacity="0.5"/>
 
-  <text x="462" y="622" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">流便</text>
-  <text x="462" y="636" text-anchor="middle" font-size="8.5" fill="#3a6020" font-family="Noto Serif TC" filter="url(#tlbl)">摩押高原・摩西已分</text>
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- WEST JORDAN TRIBES — x: 188 → 658         -->
+  <!-- ═══════════════════════════════════════════ -->
 
-  <text x="272" y="60" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">亞設</text>
-  <text x="480" y="62" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">拿弗他利</text>
-  <text x="425" y="168" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">西布倫</text>
-  <text x="440" y="254" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">以薩迦</text>
-  <text x="395" y="316" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">瑪拿西（西）</text>
-  <text x="405" y="394" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">以法蓮</text>
-  <text x="218" y="395" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">但</text>
-  <text x="218" y="408" text-anchor="middle" font-size="7.5" fill="#4a6030" font-family="Noto Serif TC" filter="url(#tlbl)">未能佔地</text>
-  <text x="405" y="472" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">便雅憫</text>
-  <text x="360" y="622" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">猶大</text>
-  <text x="360" y="640" text-anchor="middle" font-size="9" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">（第15章）</text>
-  <text x="318" y="728" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">西緬</text>
-  <text x="318" y="741" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">猶大境內</text>
-  <text x="218" y="458" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#5a3010" font-family="Noto Serif TC" filter="url(#tlbl)">非利士地</text>
-  <text x="218" y="470" text-anchor="middle" font-size="8" fill="#7a4820" font-family="Noto Serif TC" filter="url(#tlbl)">未得之地</text>
+  <!--
+    書19:24-31 亞設：地中海北部沿岸，迦密山以北
+      西：地中海 x=188
+      北：地圖頂 y=0
+      東：約到黎巴嫩山麓 x≈320
+      南：迦密山 約y=185
+  -->
+  <path id="t-asher"
+    d="M 188 0 L 322 0 L 318 88 L 300 148 L 272 180 L 248 195 L 220 175 L 200 135 L 190 68 Z"
+    fill="#a0cc88" opacity="0.75"/>
 
-  <!-- Outer border -->
-  <path d="M 230 0 L 560 0 L 570 90 L 580 130 L 395 218
-    L 530 218 L 530 700 L 372 712
-    L 522 710 L 475 760 L 418 782 L 360 770
-    L 295 742 L 248 680 L 232 598 L 188 480
-    L 188 338 L 196 258 L 205 178 L 218 40 Z"
-    fill="none" stroke="#7a5010" stroke-width="1.5" opacity="0.55"/>
-  <!-- Jordan dashed line -->
-  <line x1="390" y1="130" x2="390" y2="710" stroke="#7a5010" stroke-width="1.5" stroke-dasharray="7,5" opacity="0.4"/>
+  <!--
+    書19:32-39 拿弗他利：加利利海西北、上加利利
+      西：約到x=320
+      北：y=0
+      東：加利利海西側 x≈645
+      南：約y=195（與西布倫相接）
+  -->
+  <path id="t-naphtali"
+    d="M 322 0 L 645 0 L 645 88 L 638 130 L 610 158 L 575 172 L 545 165 L 498 150 L 448 138 L 395 112 L 355 92 L 318 88 Z"
+    fill="#88c070" opacity="0.75"/>
+
+  <!--
+    書19:10-16 西布倫：加利利南山地，拿撒勒一帶
+      北：與拿弗他利相接 y≈138-172
+      南：與以薩迦相接 y≈230
+      西：x≈300
+      東：x≈560
+  -->
+  <path id="t-zebulun"
+    d="M 300 148 L 318 88 L 355 92 L 395 112 L 448 138 L 498 150 L 545 165 L 575 172 L 590 205 L 572 222 L 530 232 L 482 228 L 435 222 L 388 218 L 348 210 L 318 202 Z"
+    fill="#b0d890" opacity="0.75"/>
+
+  <!--
+    書19:17-23 以薩迦：耶斯列平原（最肥沃）
+      北：與西布倫相接
+      南：與瑪拿西西相接 y≈282
+      西：x≈300
+      東：x≈610（約但河谷西側）
+  -->
+  <path id="t-issachar"
+    d="M 318 202 L 348 210 L 388 218 L 435 222 L 482 228 L 530 232 L 572 222 L 590 205 L 608 248 L 598 268 L 555 278 L 505 282 L 452 278 L 398 274 L 350 268 L 318 260 Z"
+    fill="#c8e898" opacity="0.75"/>
+
+  <!--
+    書17:1-18 瑪拿西西：以法蓮北方，包括多珥、米吉多
+      北：與以薩迦相接
+      南：與以法蓮相接 y≈362
+      西：地中海沿岸 x=188（含多珥）
+      東：約但河 x≈655
+  -->
+  <path id="t-wmanasseh"
+    d="M 188 185 L 220 175 L 248 195 L 272 180 L 300 148 L 318 202 L 318 260 L 350 268 L 398 274 L 452 278 L 505 282 L 555 278 L 598 268 L 610 310 L 598 328 L 548 335 L 492 338 L 438 335 L 385 330 L 332 325 L 295 318 L 260 305 L 228 285 L 205 248 Z"
+    fill="#98cc80" opacity="0.75"/>
+
+  <!--
+    書16:1-10 以法蓮：中部山地，示劍以南
+      北：與瑪拿西西相接
+      南：與便雅憫相接 y≈432
+      西：x=188（但部分受限）
+      東：約但河 x≈655
+  -->
+  <path id="t-ephraim"
+    d="M 295 318 L 332 325 L 385 330 L 438 335 L 492 338 L 548 335 L 598 328 L 612 368 L 598 382 L 548 388 L 492 390 L 438 388 L 385 385 L 335 380 L 298 372 L 272 355 Z"
+    fill="#80c068" opacity="0.75"/>
+
+  <!--
+    書19:40-48 但：原分於雅法到以革倫沿海地區
+      （後來被驅逐，但原始分配在此）
+      西：地中海 x=188
+      東：x≈295
+      北：y≈318
+      南：y≈430
+  -->
+  <path id="t-dan"
+    d="M 188 318 L 295 318 L 272 355 L 298 372 L 285 400 L 262 415 L 230 412 L 188 395 Z"
+    fill="#b8e0a0" opacity="0.75"/>
+
+  <!--
+    書18:11-28 便雅憫：猶大與以法蓮之間
+      包含耶利哥、伯特利、基遍、耶路撒冷北境
+      北：與以法蓮相接 y≈380-390
+      南：與猶大相接 y≈468
+      西：x≈285
+      東：約但河 x≈655（包含耶利哥）
+  -->
+  <path id="t-benjamin"
+    d="M 298 372 L 335 380 L 385 385 L 438 388 L 492 390 L 548 388 L 598 382 L 612 435 L 598 448 L 548 452 L 492 455 L 438 455 L 385 452 L 335 448 L 298 442 L 282 415 Z"
+    fill="#e0d888" opacity="0.75"/>
+
+  <!--
+    書15:1-63 猶大：南方廣大地業
+      北：與便雅憫相接
+      南：加低斯巴尼亞（地圖底部）
+      西：非利士平原（x≈188-285 為非利士地，未得）
+      東：死海西岸，鹽海
+      包含希伯崙、拉吉、別是巴等
+  -->
+  <path id="t-judah"
+    d="M 298 442 L 335 448 L 385 452 L 438 455 L 492 455 L 548 452 L 598 448 L 612 520 L 600 610 L 575 700 L 538 775 L 490 808 L 435 820 L 378 808 L 320 782 L 275 730 L 248 665 L 235 588 L 230 505 Z"
+    fill="#88b870" opacity="0.75"/>
+
+  <!--
+    書19:1-9 西緬：在猶大境內（南部），包含別是巴
+  -->
+  <path id="t-simeon"
+    d="M 255 692 L 388 698 L 390 775 L 360 782 L 320 782 L 275 730 L 255 712 Z"
+    fill="#a8d088" opacity="0.75"/>
+
+  <!--
+    非利士地（未得之地）：迦薩、亞實突等五城
+    書13:2-3
+  -->
+  <path id="t-philistine"
+    d="M 188 395 L 230 412 L 262 415 L 298 442 L 230 505 L 188 480 Z"
+    fill="url(#th)" opacity="0.85"/>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- TRIBE LABELS                       -->
+  <!-- ══════════════════════════════════ -->
+
+  <!-- East tribes (河東) -->
+  <text x="744" y="198" text-anchor="middle" font-size="14" font-weight="bold" fill="#5a2808" font-family="Noto Serif TC" filter="url(#tlbl)">瑪拿西（東）</text>
+  <text x="744" y="214" text-anchor="middle" font-size="9" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">巴珊・書13:29-31</text>
+  <text x="744" y="226" text-anchor="middle" font-size="8.5" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">摩西已分</text>
+
+  <text x="744" y="402" text-anchor="middle" font-size="14" font-weight="bold" fill="#5a2808" font-family="Noto Serif TC" filter="url(#tlbl)">迦得</text>
+  <text x="744" y="418" text-anchor="middle" font-size="9" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">基列南部・書13:24-28</text>
+  <text x="744" y="430" text-anchor="middle" font-size="8.5" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">摩西已分</text>
+
+  <text x="744" y="568" text-anchor="middle" font-size="14" font-weight="bold" fill="#5a2808" font-family="Noto Serif TC" filter="url(#tlbl)">流便</text>
+  <text x="744" y="584" text-anchor="middle" font-size="9" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">摩押高原・書13:15-23</text>
+  <text x="744" y="596" text-anchor="middle" font-size="8.5" fill="#6a3818" font-family="Noto Serif TC" filter="url(#tlbl)">摩西已分</text>
+
+  <!-- North/Galilee labels -->
+  <text x="252" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">亞設</text>
+  <text x="252" y="68" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書19:24-31</text>
+
+  <text x="482" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">拿弗他利</text>
+  <text x="482" y="68" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書19:32-39</text>
+
+  <text x="448" y="162" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">西布倫</text>
+  <text x="448" y="175" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書19:10-16</text>
+
+  <text x="460" y="248" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">以薩迦</text>
+  <text x="460" y="261" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">耶斯列平原・書19:17-23</text>
+
+  <!-- Central/West labels -->
+  <text x="395" y="298" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">瑪拿西（西）</text>
+  <text x="395" y="311" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書17:1-18</text>
+
+  <text x="415" y="362" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">以法蓮</text>
+  <text x="415" y="375" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書16:1-10</text>
+
+  <text x="215" y="362" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">但</text>
+  <text x="215" y="374" text-anchor="middle" font-size="7.5" fill="#4a6030" font-family="Noto Serif TC" filter="url(#tlbl)">未能佔地</text>
+  <text x="215" y="384" text-anchor="middle" font-size="7" fill="#4a6030" font-family="Noto Serif TC" filter="url(#tlbl)">書19:40-48</text>
+
+  <text x="435" y="420" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">便雅憫</text>
+  <text x="435" y="433" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書18:11-28</text>
+
+  <text x="215" y="440" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#5a3010" font-family="Noto Serif TC" filter="url(#tlbl)">非利士地</text>
+  <text x="215" y="452" text-anchor="middle" font-size="8" fill="#7a4820" font-family="Noto Serif TC" filter="url(#tlbl)">未得之地・書13:2-3</text>
+
+  <text x="378" y="595" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">猶大</text>
+  <text x="378" y="613" text-anchor="middle" font-size="9" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">書15章・希伯崙・底璧</text>
+
+  <text x="315" y="745" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a4010" font-family="Noto Serif TC" filter="url(#tlbl)">西緬</text>
+  <text x="315" y="758" text-anchor="middle" font-size="8" fill="#2a5020" font-family="Noto Serif TC" filter="url(#tlbl)">猶大境內・書19:1-9</text>
+
+  <!-- Key biblical cities on tribe layer -->
+  <!-- Hebron -->
+  <circle cx="484" cy="598" r="6" fill="#e8b020" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+  <text x="494" y="594" font-size="10" fill="#ffe060" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">希伯崙</text>
+
+  <!-- Beersheba (southern anchor) -->
+  <circle cx="390" cy="748" r="5" fill="#e0d0a0" stroke="#fff" stroke-width="1.2" opacity="0.85"/>
+  <text x="400" y="744" font-size="9.5" fill="#f0e0b0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">別是巴</text>
+
+  <!-- Shechem / Nablus -->
+  <circle cx="520" cy="162" r="5" fill="#e0e0e0" stroke="#fff" stroke-width="1" opacity="0.8"/>
+  <text x="530" y="158" font-size="9" fill="#f0f0e0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">示劍</text>
+
+  <!-- Ramoth Gilead (east) -->
+  <circle cx="748" cy="302" r="5" fill="#e0c890" stroke="#fff" stroke-width="1.2" opacity="0.85"/>
+  <text x="756" y="298" font-size="9" fill="#ffe0a0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">基列拉末</text>
+
+  <!-- Dibon (Reuben/Moab, south east) -->
+  <circle cx="748" cy="548" r="4.5" fill="#e0c890" stroke="#fff" stroke-width="1" opacity="0.8"/>
+  <text x="756" y="545" font-size="9" fill="#ffe0a0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">底本</text>
+
+  <!-- Mahanaim (Gad) -->
+  <circle cx="718" cy="402" r="4.5" fill="#e0c890" stroke="#fff" stroke-width="1" opacity="0.8"/>
+  <text x="726" y="398" font-size="9" fill="#ffe0a0" font-family="Noto Serif TC" font-weight="bold" filter="url(#tlbl)">瑪哈念</text>
+
+  <!-- Outer border (land mass) -->
+  <path d="M 188 0 L 645 0 L 645 88 L 658 88 L 820 88 L 820 660
+    L 668 660 L 600 610 L 575 700 L 538 775 L 490 808
+    L 435 820 L 378 808 L 320 782 L 275 730 L 248 665
+    L 235 588 L 230 505 L 188 480 L 188 0 Z"
+    fill="none" stroke="#5a4010" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- Jordan River line -->
+  <line x1="658" y1="88" x2="658" y2="660" stroke="#3a5818" stroke-width="2" stroke-dasharray="8,5" opacity="0.5"/>
+  <!-- Label: 約但河 west side -->
+  <text x="640" y="420" font-size="8.5" fill="#3a7050" font-family="Noto Serif TC" filter="url(#tlbl)" transform="rotate(-90,640,420)" opacity="0.8">約　但　河</text>
 
   </svg>
   </div><!-- end layer-tribes -->
